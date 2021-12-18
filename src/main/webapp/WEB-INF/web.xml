@@ -69,8 +69,8 @@
   	<filter-name>SetCharEncoding</filter-name>
   	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
   		<init-param>
-  		<param-name>encoding</param-name>
-  		<param-value>utf-8</param-value>
+  			<param-name>encoding</param-name>
+  			<param-value>utf-8</param-value>
   		</init-param>
   </filter>
   <filter-mapping>
