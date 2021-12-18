@@ -9,4 +9,72 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 해당 프로젝트(웹애플리케이션) 전체에서 사용할 수 있는 컨텍스트 초기화 파라미터 -->
+  <context-param>
+    <param-name>INIT_PARAM</param-name>
+    <param-value>web.xml에 저장한 초기화 매개변수</param-value>
+  </context-param> 
+  
+  <!-- 웹 애플리케이션에서 에러(예외) 발생시 처리할 페이지를 지정한다. -->
+  <!-- 
+  	404 : Not found. 페이지를 찾을 수 없을때 발생
+  	405 : Method not Allowed. get/post방식으로 전송시 해당 요청을 처리할
+  		컨트롤러(메서드)가 없을때 발생
+  	500 : Internal server error. 서버 내부 오류로 코드에 오타가 있거나
+  		로직에 문제가 있어 웹 서버가 요청을 처리할 수 없을때 발생
+  		
+  	※ 에러페이지 처리는 실 서비스에서는 반드시 필요한 부분이지만
+  	개발시에는 에러를 확인한 후 디버깅하면서 진행해야 하므로 
+  	개발이 완료될때까지는 주석으로 처리해 두는것이 좋다. 
+  -->
+  <!-- <error-page>
+    <error-code>404</error-code>
+    <location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>405</error-code>
+    <location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/02ImplicitObject/Exception.jsp</location>
+  </error-page> -->  
+  
+   <!-- 오라클 연결정보 컨텍스트 초기화 파라미터로 추가하기 -->
+  <context-param>
+    <param-name>OracleDriver</param-name>
+    <param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OracleURL</param-name>
+    <param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OracleId</param-name>
+    <param-value>musthave</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OraclePwd</param-name>
+    <param-value>1234</param-value>
+  </context-param>
+  
+ <!-- 세션 유지시간 설정: 분 단위로 설정한다. -->
+  <session-config>
+  	<session-timeout>10</session-timeout>
+  </session-config>
+  
+  <!-- 한글깨짐에 대한 필터 설정 : 현재 제작중인 웹 애플리케이션 전체에 적용한다. -->
+ <filter>
+  	<filter-name>SetCharEncoding</filter-name>
+  	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+  		<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  		</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SetCharEncoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
