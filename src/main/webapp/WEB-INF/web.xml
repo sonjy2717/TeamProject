@@ -77,4 +77,15 @@
   	<filter-name>SetCharEncoding</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <!-- MVC 패턴으로 회원인증 하기 메핑 처리 -->
+<servlet>
+	<servlet-name>MemberAuth</servlet-name>
+	<servlet-class>servlet.MemberAuth</servlet-class>
+	<init-param>
+	<!-- 해당 서블릿 내에서만 사용할 수 있는 초기화 파라미터 -->
+		<param-name>admin_id</param-name>
+		<param-value>nakja</param-value>
+	</init-param>
+</servlet>
 </web-app>
