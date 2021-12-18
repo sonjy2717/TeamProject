@@ -12,4 +12,4 @@
 </script>
 </body>
 </html>
-<!-- http://suamil.com/main/main.html -->
+<!-- http://suamil.com/main/main.jsp -->

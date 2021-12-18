@@ -52,7 +52,7 @@
   </context-param>
   <context-param>
     <param-name>OracleId</param-name>
-    <param-value>musthave</param-value>
+    <param-value>justcoding</param-value>
   </context-param>
   <context-param>
     <param-name>OraclePwd</param-name>
@@ -85,7 +85,7 @@
 	<init-param>
 	<!-- 해당 서블릿 내에서만 사용할 수 있는 초기화 파라미터 -->
 		<param-name>admin_id</param-name>
-		<param-value>nakja</param-value>
+		<param-value>admin</param-value>
 	</init-param>
 </servlet>
 </web-app>
