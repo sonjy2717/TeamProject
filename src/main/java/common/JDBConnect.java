@@ -21,7 +21,7 @@ public class JDBConnect {
 			Class.forName("oracle.jdbc.OracleDriver");
 			//커넥션 URL 생성
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String id = "musthave";  //id
+			String id = "justcoding";  //id
 			String pwd = "1234"; //패스워드
 			con = DriverManager.getConnection(url, id,pwd);
 			
@@ -44,12 +44,14 @@ public class JDBConnect {
 		}
 	}
 	public JDBConnect(ServletContext application) {
+		
+		String driver = application.getInitParameter("OracleDriver");
+		String url = application.getInitParameter("OracleURL");
+		String id = application.getInitParameter("OracleId");
+		String pwd = application.getInitParameter("OraclePwd");
+		
 		try {
-			String driver = application.getInitParameter("OracleDriver");
 			Class.forName(driver);
-			String url = application.getInitParameter("OracleURL");
-			String id = application.getInitParameter("OracleId");
-			String pwd = application.getInitParameter("OraclePwd");
 			con = DriverManager.getConnection(url, id,pwd);
 			System.out.println("DB연결 성공(인자 생성자2)");
 		}
