@@ -26,7 +26,6 @@ function deletePost(){
 		form.submit(); 
 	}
 }
-	
 
 </script>
  <body>
@@ -105,15 +104,15 @@ function deletePost(){
 </tbody>
 </table>
 
-	<div class="row mb-3">
-		<div class="col d-flex justify-content-end">
-			<!-- 각종 버튼 부분 -->
-			<button type="button" class="btn btn-primary btn-sm">수정하기</button>
-			<button type="button" class="btn btn-success btn-sm" onclick="deletePost()">삭제하기</button>	
-			<button type="button" class="btn btn-warning btn-sm" 
-				onclick="location.href='ListSkin.jsp';">리스트보기</button>
-		</div>
+<div class="row mb-3">
+	<div class="col d-flex justify-content-end">
+		<!-- 각종 버튼 부분 -->
+		<button type="button" class="btn btn-primary btn-sm">수정하기</button>
+		<button type="button" class="btn btn-success btn-sm" onclick="deletePost()">삭제하기</button>	
+		<button type="button" class="btn btn-warning btn-sm" 
+			onclick="location.href='ListSkin.jsp';">리스트보기</button>
 	</div>
+</div>
 </form> 
 
 				</div>
