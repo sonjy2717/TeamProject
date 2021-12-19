@@ -12,11 +12,9 @@ String idx = request.getParameter("idx");
 BoardDAO dao = new BoardDAO(application);
 BoardDTO dto = dao.selectView(idx);
 dao.updateVisitCount(idx);
-
 dao.close();
 %>
 <script>
-
 function deletePost(){
 	var confirmed = confirm("정말로 삭제하시겠습니까?");
 	if(confirmed){
@@ -27,7 +25,6 @@ function deletePost(){
 	}
 }
 	
-
 </script>
  <body>
 	<center>
@@ -105,13 +102,15 @@ function deletePost(){
 </tbody>
 </table>
 
-<div class="row text-center d-flex">
-	<!-- 각종 버튼 부분 -->
-	<button type="button" class="btn btn-primary btn-sm">수정하기</button>
-	<button type="button" class="btn btn-success btn-sm" onclick="deletePost()">삭제하기</button>	
-	<button type="button" class="btn btn-warning btn-sm" 
-		onclick="location.href='ListSkin.jsp';">리스트보기</button>
-</div>
+	<div class="row mb-3">
+		<div class="col d-flex justify-content-end">
+			<!-- 각종 버튼 부분 -->
+			<button type="button" class="btn btn-primary btn-sm">수정하기</button>
+			<button type="button" class="btn btn-success btn-sm" onclick="deletePost()">삭제하기</button>	
+			<button type="button" class="btn btn-warning btn-sm" 
+				onclick="location.href='ListSkin.jsp';">리스트보기</button>
+		</div>
+	</div>
 </form> 
 
 				</div>
