@@ -1,7 +1,20 @@
+<%@page import="model1.board.BoardDTO"%>
+<%@page import="model1.board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">   
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<%
+String idx = request.getParameter("idx");
+//DAO 객체 생성 및 DB연결
+BoardDAO dao = new BoardDAO(application);
+BoardDTO dto = dao.selectView(idx);
+dao.updateVisitCount(idx);
+
+dao.close();
+%>
 
  <body>
 	<center>
@@ -21,8 +34,9 @@
 				</div>
 				<div>
 
-<form enctype="multipart/form-data">
+<form name="wirteFrm" enctype="multipart/form-data">
 <table class="table table-bordered">
+<input type="hidden"  name="idx" value="<%=dto.getIdx() %>"/>
 <colgroup>
 	<col width="20%"/>
 	<col width="30%"/>
@@ -34,12 +48,12 @@
 		<th class="text-center" 
 			style="vertical-align:middle;">작성자</th>
 		<td>
-			홍길동
+			<%=dto.getId() %>
 		</td>
 		<th class="text-center" 
 			style="vertical-align:middle;">작성일</th>
 		<td>
-			2018-01-05
+			<%=dto.getPostdate()%>
 		</td>
 	</tr>
 	<tr>
@@ -51,25 +65,21 @@
 		<th class="text-center" 
 			style="vertical-align:middle;">조회수</th>
 		<td>
-			100
+			<%=dto.getVisitcount() %>
 		</td>
 	</tr>
 	<tr>
 		<th class="text-center" 
 			style="vertical-align:middle;">제목</th>
 		<td colspan="3">
-			제목영역입니다.
+			<%=dto.getTitle() %>
 		</td>
 	</tr>
 	<tr>
 		<th class="text-center" 
 			style="vertical-align:middle;">내용</th>
 		<td colspan="3">
-			내용영역입니다<br/>
-			내용영역입니다<br/>
-			내용영역입니다<br/>
-			내용영역입니다<br/>
-			내용영역입니다<br/>
+			<%=dto.getContent() %>
 		</td>
 	</tr>
 	<tr>
@@ -82,11 +92,11 @@
 </tbody>
 </table>
 
-<div class="row text-center" style="">
+<div class="row text-center d-flex">
 	<!-- 각종 버튼 부분 -->
-	<button type="button" class="btn btn-primary">수정하기</button>
-	<button type="button" class="btn btn-success">삭제하기</button>	
-	<button type="button" class="btn btn-warning" 
+	<button type="button" class="btn btn-primary btn-sm">수정하기</button>
+	<button type="button" class="btn btn-success btn-sm">삭제하기</button>	
+	<button type="button" class="btn btn-warning btn-sm" 
 		onclick="location.href='ListSkin.jsp';">리스트보기</button>
 </div>
 </form> 
