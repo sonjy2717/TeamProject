@@ -42,7 +42,7 @@
 						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
 						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
 						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
+						<td><input type="number" name="" value="1" class="n_box" /></td>
 						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
 					</tr>
 					<tr>
@@ -50,7 +50,7 @@
 						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
 						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
 						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
+						<td><input type="number" name="" value="1" class="n_box" /></td>
 						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
 					</tr>
 					<tr>
@@ -58,7 +58,7 @@
 						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
 						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
 						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
+						<td><input type="number" name="" value="1" class="n_box" /></td>
 						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
 					</tr>
 					<tr>
@@ -66,7 +66,7 @@
 						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
 						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
 						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
+						<td><input type="number" name="" value="1" class="n_box" /></td>
 						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
 					</tr>
 					<tr>
@@ -74,7 +74,7 @@
 						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
 						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
 						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
+						<td><input type="number" name="" value="1" class="n_box" /></td>
 						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
 					</tr>
 				</table>
