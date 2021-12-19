@@ -185,5 +185,23 @@ public class BoardDAO extends JDBConnect{
 				System.out.println("게시물 조회수 증가 중 예외가 발생하였습니다.");
 				e.printStackTrace();
 			}
-		}
+	}
+	public int deletePost(BoardDTO dto) { 
+        int result = 0;
+
+        try {
+            String query = "DELETE FROM board WHERE idx=?"; 
+            
+            psmt = con.prepareStatement(query); 
+            psmt.setString(1, dto.getIdx()); 
+           
+            result = psmt.executeUpdate(); 
+        } 
+        catch (Exception e) {
+            System.out.println("게시물 삭제 중 예외 발생");
+            e.printStackTrace();
+        }
+        
+        return result; 
+    }
 }

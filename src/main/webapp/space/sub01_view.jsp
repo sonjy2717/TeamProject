@@ -15,7 +15,20 @@ dao.updateVisitCount(idx);
 
 dao.close();
 %>
+<script>
 
+function deletePost(){
+	var confirmed = confirm("정말로 삭제하시겠습니까?");
+	if(confirmed){
+		var form = document.writeFrm;
+		form.method="post"; 
+		form.action="DeleteProcess.jsp"; 
+		form.submit(); 
+	}
+}
+	
+
+</script>
  <body>
 	<center>
 	<div id="wrap">
@@ -95,7 +108,7 @@ dao.close();
 <div class="row text-center d-flex">
 	<!-- 각종 버튼 부분 -->
 	<button type="button" class="btn btn-primary btn-sm">수정하기</button>
-	<button type="button" class="btn btn-success btn-sm">삭제하기</button>	
+	<button type="button" class="btn btn-success btn-sm" onclick="deletePost()">삭제하기</button>	
 	<button type="button" class="btn btn-warning btn-sm" 
 		onclick="location.href='ListSkin.jsp';">리스트보기</button>
 </div>
