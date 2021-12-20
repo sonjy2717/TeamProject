@@ -64,18 +64,6 @@
   	<session-timeout>10</session-timeout>
   </session-config>
   
-  <!-- 게시판 페이징 처리를 위한 파라미터 추가 -->
-  <!-- 한 페이지에 출력할 게시물의 개수 -->
-  <context-param>
-  	<param-name>POSTS_PER_PAGE</param-name>
-  	<param-value>3</param-value>
-  </context-param>
-  <!-- 한 블럭당 출력할 페이지 번호의 개수 -->
-  <context-param>
-  	<param-name>PAGES_PER_BLOCK</param-name>
-  	<param-value>3</param-value>
-  </context-param>
-  
   <!-- 한글깨짐에 대한 필터 설정 : 현재 제작중인 웹 애플리케이션 전체에 적용한다. -->
  <filter>
   	<filter-name>SetCharEncoding</filter-name>
@@ -94,11 +82,25 @@
 	<servlet>
 		<servlet-name>MemberAuth</servlet-name>
 		<servlet-class>servlet.MemberAuth</servlet-class>
-	<init-param>
+		<init-param>
+		<!-- 해당 서블릿 내에서만 사용할 수 있는 초기화 파라미터 -->
+			<param-name>admin_id</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+	</servlet>
+    <servlet-mapping>
+    	<servlet-name>MemberAuth</servlet-name>
+    	<url-pattern>/member/MemberAuth.do</url-pattern>
+    </servlet-mapping>
 	
-	<!-- 해당 서블릿 내에서만 사용할 수 있는 초기화 파라미터 -->
-		<param-name>admin_id</param-name>
-		<param-value>admin</param-value>
-	</init-param>
-</servlet>
+	
+	<servlet>
+    	<servlet-name>Main</servlet-name>
+    	<servlet-class>controller.MainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>Main</servlet-name>
+    	<url-pattern>/main/main.do</url-pattern>
+    </servlet-mapping>
+	
 </web-app>
