@@ -9,7 +9,7 @@
 <%
 BoardDAO dao = new BoardDAO(application);
 Map<String, Object> param = new HashMap<String, Object>();
-
+int totalCount = dao.selectCount2(param,"공지");
 //dao.practice(param,"1");
 // List<BoardDTO> boardLists = dao.selectList(param); //모든게시판의 모든 게시물 출력용
 List<BoardDTO> boardLists = dao.selectList2(param, "공지");
