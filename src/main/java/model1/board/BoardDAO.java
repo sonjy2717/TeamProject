@@ -14,11 +14,35 @@ public class BoardDAO extends JDBConnect{
 		super(application);
 	}
 	
-	public int selectCount(Map<String, Object> map) {
+	public int selectCount(Map<String, Object> map) { //모든게시물수 출력
 		
 		int totalCount = 0;
 		
 		String query = "SELECT COUNT(*) FROM board";
+		
+		if(map.get("searchWord") != null) {
+			query += " WHERE "+ map.get("searchField") + " "
+					+ " LIKE '%" + map.get("searchWord") + "%' ";
+		}
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			rs.next();
+			totalCount = rs.getInt(1);
+		}
+		catch(Exception e) {
+			System.out.println("게시물 수를 구하는 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+	public int selectCount2(Map<String, Object> map, String tName) { //해당게시판 게시물수 출력
+		
+		int totalCount = 0;
+		
+		String query = "SELECT COUNT(*) FROM board WHERE tname='"+tName+"'";
 		
 		if(map.get("searchWord") != null) {
 			query += " WHERE "+ map.get("searchField") + " "
@@ -76,9 +100,6 @@ public class BoardDAO extends JDBConnect{
 		
 		return bbs;
 	}
-	public int practice (Map<String, Object> map, String tName) {
-		return 1;
-	}
 	
 	public List<BoardDTO> selectList2(Map<String, Object> map, String tName){ //선택한 게시판의 모든게시물 출력용
 		List<BoardDTO> bbs =  new Vector<BoardDTO>();
@@ -118,25 +139,80 @@ public class BoardDAO extends JDBConnect{
 		return bbs;
 	}
 
-	public int insertWrite(BoardDTO dto, String tName) {
+	public int insertWrite(BoardDTO dto, String tname) { //원하는 tName 게시판에 게시글 삽입
 		//입력결과 확인용 변수
 		int result = 0;
 		
 		try {
-			String query = "INSERT INTO board ( idx, title, content, id , visitcount, tname )"
-					+ " VALUES ( seq_board_num, ?, ?, ?, 0, ?) ";
 			
+			String query = " INSERT INTO board ( "
+					 + " idx, title ,content , id,visitcount, tname, ofile) "
+					 + " VALUES ( "
+					 + " seq_board_num.NEXTVAL, ?, ?, ?,0,?,?)";
+			//동적쿼리문 실행을 위한 prepared객체 생성.
 			psmt= con.prepareStatement(query);
+			//순서대로 인파라미터 설정.
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getId());
-			psmt.setString(4, tName);
-			
+			psmt.setString(4, tname);
+			psmt.setString(5, dto.getOfile());
+			//쿼리문 실행 : 입력에 성공한다면 1이 반환된다. 실패시 0반환.
 			result = psmt.executeUpdate();
+			}
+			catch(Exception e) {
+				System.out.println("게시물 입력1 중 예외 발생");
+				e.printStackTrace();
+			}
+		
+		return result;
+	}
+	public int updateEdit(BoardDTO dto) { 
+        int result = 0;   
+        try {
+            
+            String query = "UPDATE board SET "
+                         + " title=?, content=? "
+                         + " WHERE idx=?";
+            
+           
+            psmt = con.prepareStatement(query);
+          
+            psmt.setString(1, dto.getTitle());
+            psmt.setString(2, dto.getContent());
+            psmt.setString(3, dto.getIdx());
+            
+           
+            result = psmt.executeUpdate();
+        } 
+        catch (Exception e) {
+            System.out.println("게시물 수정 중 예외 발생");
+            e.printStackTrace();
+        }
+        
+        return result; 
+    }
+	
+	public int updateEdit2(BoardDTO dto, String tName) { //원하는 tName 게시판에 게시글 수정
+		//입력결과 확인용 변수
+		int result = 0;
+		
+		try {
 			
-		}
-		catch(Exception e) {
-			System.out.println("게시물 입력 중 예외 발생");
+			String query = " UPDATE board SET title=?, content=? WHERE idx=? ";
+			
+			// prepared 객체 생성
+            psmt = con.prepareStatement(query);
+            //인파라미터 설정
+            psmt.setString(1, dto.getTitle());
+            psmt.setString(2, dto.getContent());
+            psmt.setString(3, dto.getIdx());
+            
+            // 쿼리 실행 
+            result = psmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("게시물 수정2 중 예외 발생");
 			e.printStackTrace();
 		}
 		

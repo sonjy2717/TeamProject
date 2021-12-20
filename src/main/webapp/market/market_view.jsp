@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/global_head.jsp" %>
 
 
@@ -41,7 +42,7 @@
 								</dl>
 								<dl>
 									<dt>수량</dt>
-									<dd><input type="text" name="" value="1" class="n_box" /></dd>
+									<dd><input type="number" name="" value="1" class="n_box" /></dd>
 								</dl>
 								<dl style="border-bottom:0px;">
 									<dt>주문정보</dt>
