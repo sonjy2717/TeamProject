@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,17 +32,17 @@
 							<col width="55px" />
 						</colgroup>
 						<tr>
-							<th><img src="../images/login_tit01.gif" alt="아이디" /></th>
+							<th><img src="../images/login_tit01.gif" name="user_id" alt="아이디"   /></th>
 							<td><input type="text" name="" value="" class="login_input" /></td>
 							<td rowspan="2"><input type="image" src="../images/login_btn01.gif" alt="로그인" /></td>
 						</tr>
 						<tr>
-							<th><img src="../images/login_tit02.gif" alt="패스워드" /></th>
+							<th><img src="../images/login_tit02.gif" name="user_pw" alt="패스워드" /></th>
 							<td><input type="text" name="" value="" class="login_input" /></td>
 						</tr>
 					</table>
 					<p>
-						<input type="checkbox" name="" value="" /><img src="../images/login_tit03.gif" alt="저장" />
+						<input type="checkbox" name="save_check" value=""  /><img src="../images/login_tit03.gif" alt="저장" />
 						<a href="../member/id_pw.jsp"><img src="../images/login_btn02.gif" alt="아이디/패스워드찾기" /></a>
 						<a href="../member/join01.jsp"><img src="../images/login_btn03.gif" alt="회원가입" /></a>
 					</p>
