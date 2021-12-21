@@ -6,7 +6,7 @@
 
 <%
 //폼값 받기
-String idx=request.getParameter("idx");
+String idx=request.getParameter("idx"); 
 
 //DTO객체와 DB 연결 및 기존 게시물 가져오기
 BoardDTO dto = new BoardDTO();
