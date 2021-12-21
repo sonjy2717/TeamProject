@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<script type="text/javascript"
+src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6897b853d4a630fe1328f44e56ee93d">
+</script>
 
 
  <body>
@@ -21,8 +24,32 @@
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;센터소개&nbsp;>&nbsp;오시는길<p>
 				</div>
 				<div class="con_box">
-					<p class="con_tit"><img src="../images/center/sub07_tit01.gif" alt="오시는길" /></p>
-					<img src="../images/center/sub07_img01.gif" class="con_img"/>
+					<div id="map" style="width:740px;height:400px;"></div>
+				<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				mapOption = { 
+				    center: new kakao.maps.LatLng(37.45987327201324, 126.88059341284591), // 지도의 중심좌표
+				    level: 3 // 지도의 확대 레벨
+				};
+				
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+				//마커가 표시될 위치입니다 
+				var markerPosition  = new kakao.maps.LatLng(37.45987327201324, 126.88059341284591); 
+				
+				//마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+				position: markerPosition
+				});
+				
+				//마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				
+				//아래 코드는 지도 위의 마커를 제거하는 코드입니다
+				//marker.setMap(null);    
+				</script>
+					<!-- <p class="con_tit"><img src="../images/center/sub07_tit01.gif" alt="오시는길" /></p> -->
+					<!-- <img src="../images/center/sub07_img01.gif" class="con_img"/> -->
 					<p class="con_tit"><img src="../images/center/sub07_tit02.gif" alt="자가용 오시는길" /></p>
 					<div class="in_box">
 						<p class="dot_tit">강북 방향</p>
