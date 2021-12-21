@@ -89,6 +89,8 @@ public class BoardDAO extends JDBConnect{
 				dto.setPostdate(rs.getDate("postdate"));
 				dto.setId(rs.getString("id"));
 				dto.setVisitcount(rs.getString("visitcount"));
+				dto.setSfile(rs.getString("sfile"));
+				dto.setOfile(rs.getString("ofile"));
 				
 				bbs.add(dto);
 			}	
@@ -127,6 +129,11 @@ public class BoardDAO extends JDBConnect{
 				dto.setPostdate(rs.getDate("postdate"));
 				dto.setId(rs.getString("id"));
 				dto.setVisitcount(rs.getString("visitcount"));
+				dto.setSfile(rs.getString("sfile"));
+				dto.setOfile(rs.getString("ofile"));
+				
+				System.out.println("파일명:"+rs.getString("sfile"));
+				
 				
 				bbs.add(dto);
 			}	
@@ -146,9 +153,9 @@ public class BoardDAO extends JDBConnect{
 		try {
 			
 			String query = " INSERT INTO board ( "
-					 + " idx, title ,content , id,visitcount, tname, ofile) "
+					 + " idx, title ,content , id,visitcount, tname, ofile, sfile) "
 					 + " VALUES ( "
-					 + " seq_board_num.NEXTVAL, ?, ?, ?,0,?,?)";
+					 + " seq_board_num.NEXTVAL, ?, ?, ?,0,?,?,?)";
 			//동적쿼리문 실행을 위한 prepared객체 생성.
 			psmt= con.prepareStatement(query);
 			//순서대로 인파라미터 설정.
@@ -157,6 +164,7 @@ public class BoardDAO extends JDBConnect{
 			psmt.setString(3, dto.getId());
 			psmt.setString(4, tname);
 			psmt.setString(5, dto.getOfile());
+			psmt.setString(6, dto.getSfile());
 			//쿼리문 실행 : 입력에 성공한다면 1이 반환된다. 실패시 0반환.
 			result = psmt.executeUpdate();
 			}
@@ -235,8 +243,8 @@ public class BoardDAO extends JDBConnect{
 				 dto.setPostdate(rs.getDate("postdate"));
 				 dto.setVisitcount(rs.getString("visitcount"));
 				 dto.setTitle(rs.getString("title")); dto.setContent(rs.getString("content")); 
-				 dto.setOfile("ofile");
-				 dto.setOfile("sfile");
+				 dto.setOfile(rs.getString("ofile"));
+				 dto.setSfile(rs.getString("sfile"));
             }
 			
 			

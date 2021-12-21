@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="model1.board.BoardDTO"%>
 <%@page import="model1.board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,6 +9,7 @@
 
 <%
 String idx = request.getParameter("idx");
+String tname = request.getParameter("tname");
 //DAO 객체 생성 및 DB연결
 BoardDAO dao = new BoardDAO(application);
 BoardDTO dto = dao.selectView(idx);
@@ -25,7 +27,7 @@ function deletePost(){
 		form.submit(); 	
 	}
 }
-
+	
 </script>
  <body>
 	<center>
@@ -40,8 +42,26 @@ function deletePost(){
 			</div>
 			<div class="right_contents">
 				<div class="top_title">
-					<img src="../images/space/sub01_title.gif" alt="공지사항" class="con_title" />
+<%
+ if(tname.equals("공지")){
+%>
+<img src="../images/space/sub01_title.gif" alt="공지사항" class="con_title" />
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;공지사항<p>
+<%
+ } else if(tname.equals("자유")){
+%>
+<img src="../images/space/sub03_title.gif" alt="자유게시판" class="con_title" />
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;자유게시판<p>
+<%
+ } else if(tname .equals("정보")){
+%>
+<img src="../images/space/sub05_title.gif" alt="정보자료실" class="con_title" />
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;정보자료실<p>
+
+<%
+ }
+%>
+					
 				</div>
 				<div>
 
@@ -98,24 +118,23 @@ function deletePost(){
 			<th class="text-center" 
 				style="vertical-align:middle;">첨부파일</th>
 			<td colspan="3">
+				<%
+				if(dto.getOfile() != null){
+				%>
 			
-<%-- <% if(dto.getOfile() != null){
-%>
-	<a href="../mvcboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
-			다운로드</a>
-<%
-}
-%> --%>
+				<img src="../Uploads/<%= dto.getSfile() %>" width="100" height="100">
+				<% 	
+				}
+				%>
 			</td>
 		</tr>
 	</tbody>
 	</table>
 
-
 	<div class="row mb-3">
 		<div class="col d-flex justify-content-end">
 			<!-- 각종 버튼 부분 -->
-			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='Edit.jsp?idx=<%=dto.getIdx()%>';">수정하기</button>
+			<button type="button" class="btn btn-primary btn-sm" onclick="location.href='Edit.jsp?idx=<%=dto.getIdx()%>&tname=<%=tname%>';">수정하기</button>
 			<button type="button" class="btn btn-success btn-sm" onclick="deletePost();">삭제하기</button>	
 			<button type="button" class="btn btn-warning btn-sm" 
 				onclick="location.href='ListSkin.jsp';">리스트보기</button>
