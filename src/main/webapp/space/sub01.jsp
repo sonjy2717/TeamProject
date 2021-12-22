@@ -127,12 +127,14 @@ dao.close();
 						<td class="text-center"><%=dto.getVisitcount()%></td>
 						<td class="text-center">
 						<%
-						if(dto.getOfile()!=null){
-						%>
-							<a href="Download.jsp?oName=<%=URLEncoder.encode(dto.getOfile(),"UTF-8")%>&sName=<%=URLEncoder.encode(dto.getSfile(),"UTF-8")%>">[다운로드]</a>
-						<img src="../Uploads/<%= dto.getSfile() %>" width="150">
-						<% 	
-						}
+					 	if(tname.equals("정보")|| tname.equals("사진")){
+							if(dto.getOfile()!=null){
+							%>
+								<a href="Download.jsp?oName=<%=URLEncoder.encode(dto.getOfile(),"UTF-8")%>&sName=<%=URLEncoder.encode(dto.getSfile(),"UTF-8")%>">[다운로드]</a>
+							<img src="../Uploads/<%= dto.getSfile() %>" width="150">
+							<% 	
+					 		}
+					 	}
 						%>
 						</td>
 				</tr>
