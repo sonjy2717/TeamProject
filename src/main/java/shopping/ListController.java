@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model2.shopping.ShoppingDAO;
-import model2.shopping.ShoppingDTO;
+import model2.shopping.ManagementDTO;
 import utils.BoardPage;
 
-@WebServlet("/market/sub01.do")
+@WebServlet("/market/list.do")
 public class ListController extends HttpServlet {
 	
 	@Override
@@ -27,14 +27,16 @@ public class ListController extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		//게시물 개수 카운트
-		int totalCount = dao.selectCount(map);
+		int totalCount = dao.selectCount();
 		
 		/* 페이지 처리 start */
 		//web.xml에 접근하기 위해 서블릿에서 application 내장객체를 얻어옴.
 		ServletContext application = getServletContext();
+		
+		
 		//컨텍스트 초기화 파라미터를 얻어옴.
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
-		int blockPage = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
+		int blockPage = Integer.parseInt(application.getInitParameter("POSTS_PER_BLOCK"));
 		
 		/*
 		목록에 첫 진입시에는 무조건 1페이지로 가정한 후 게시물을 얻어옴.
@@ -53,12 +55,13 @@ public class ListController extends HttpServlet {
 		/* 페이지 처리 end */
 		
 		//현재 페이지에 출력할 게시물을 얻어옴
-		List<ShoppingDTO> boardLists = dao.selectListPage(map);
-		//커넥션풀에 자원 반납
+		List<ManagementDTO> boardLists = dao.selectListPage(map);
+		
+		//자원 해제
 		dao.close();
 		
 		//페이지 번호를 생성하기 위해 메서드 호출
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../market/sub01.do");
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../market/list.do");
 		//View로 전달할 데이터를 Map컬렉션에 저장
 		map.put("pagingImg", pagingImg); //페이지 번호
 		map.put("totalCount", totalCount); //전체 게시물의 개수

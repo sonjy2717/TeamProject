@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/global_head.jsp" %>
 
-
  <body>
 	<center>
 	<div id="wrap">
@@ -47,40 +46,43 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:choose>
+					<c:when test="${ empty list }">
 						<tr>
-							<td><input type="checkbox" name="cake" value="" /></td>
-							<td><img src="../images/market/cake_img1.jpg" /></td>
-							<td>녹차 쌀 무스케잌</td>
-							<td>30,000원</td>
-							<td><img src="../images/market/j_icon.gif" />&nbsp;300원</td>
+							<td colspan="9" align="center">
+								장바구니가 비었습니다.
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${ list }" var="row" varStatus="loop">
+						<tr align="center">
 							<td>
-								<input type="number" name="" value="2" class="basket_num" />&nbsp;
-								<a href=""><img src="../images/market/m_btn.gif" /></a>
+								<input type="checkbox" name="cake" value="" />
+							</td>
+							<td>
+								<img src="../images/market/${ row.img }" width="50px"/>
+							</td>
+							<td>${ row.name }</td>
+							<td>${ row.price }원</td>
+							<td><img src="../images/market/j_icon.gif" />${ row.point }원</td>
+							<td>
+								<input type="number" name="count" value="1" class="basket_num" />&nbsp;
+								<button type="button" onclick="edit();"><img src="../images/market/m_btn.gif" /></button>
 							</td>
 							<td>무료배송</td>
 							<td>[조건]</td>
-							<td><span>60,000원<span></td>
+							<td><span>${ row.price }</span></td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="cake" value="" /></td>
-							<td><img src="../images/market/cake_img1.jpg" /></td>
-							<td>녹차 쌀 무스케잌</td>
-							<td>30,000원</td>
-							<td><img src="../images/market/j_icon.gif" />&nbsp;300원</td>
-							<td>
-								<input type="number" name="" value="2" class="basket_num" />&nbsp;
-								<a href=""><img src="../images/market/m_btn.gif" /></a>
-							</td>
-							<td>무료배송</td>
-							<td>[조건]</td>
-							<td><span>60,000원<span></td>
-						</tr>
+						</c:forEach>
+					</c:otherwise>
+					</c:choose>
 					</tbody>
 				</table>
-				<p class="basket_text">[ 기본 배송 ] <span>상품구매금액</span> 137,000 + <span>배송비</span> 0 = 합계 : <span class="money">137,000원</span>
+				<p class="basket_text">합계 : <span class="money">137,000원</span>
 				<br /><br />
-				<a href=""><img src="../images/market/basket_btn01.gif" /></a>&nbsp;
-				<a href="basket02.jsp"><img src="../images/market/basket_btn02.gif" /></a>
+				<a href="../market/list.do"><img src="../images/market/basket_btn01.gif" /></a>&nbsp;
+				<a href="../market/buy.do"><img src="../images/market/basket_btn02.gif" /></a>
 				</p>
 			</div>
 		</div>
