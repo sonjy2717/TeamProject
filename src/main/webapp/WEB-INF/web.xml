@@ -104,11 +104,11 @@
     </servlet-mapping>
 	<context-param>
  	<param-name>POSTS_PER_PAGE</param-name>
- 	<param-value>10</param-value>
+ 	<param-value>3</param-value>
  </context-param>
  <!-- 한 블럭당 출력할 페이지 번호의 갯수 -->
   <context-param>
  	<param-name>POSTS_PER_BLOCK</param-name>
- 	<param-value>5</param-value>
+ 	<param-value>3</param-value>
  </context-param>
 </web-app>
