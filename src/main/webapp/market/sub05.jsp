@@ -1,8 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<!-- 체험학습 신청 -->
 
 
+<head>
+<!-- 체험 희망날짜 datepicker적용 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script>
+$( function() {
+  $( "#datepicker" ).datepicker();
+  $( "#datepicker" ).datepicker("option", "dateFormat", "yy-mm-dd");
+} );
+</script>
+<!-- 폼 내용 검증 -->
+<script type="text/javascript">
+function validateForm(form) {
+	if (form.name.value == "") {
+		alert("이름을 입력하세요.");
+		form.name.focus();
+		return false;
+	}
+	if (form.phone_num1.value == "") {
+		alert("연락처를 입력하세요.");
+		form.phone_num1.focus();
+		return false;
+	}
+	if (form.phone_num2.value == "") {
+		alert("연락처를 입력하세요.");
+		form.phone_num2.focus();
+		return false;
+	}
+	if (form.phone_num3.value == "") {
+		alert("연락처를 입력하세요.");
+		form.phone_num3.focus();
+		return false;
+	}
+	if (form.email1.value == "") {
+		alert("이메일을 입력하세요.");
+		form.email1.focus();
+		return false;
+	}
+	if (form.email2.value == "") {
+		alert("이메일을 입력하세요.");
+		form.email2.focus();
+		return false;
+	}
+	if (form.ft_cake.value=="" && form.ft_cookie.value=="") {
+		alert("케익/쿠키 체험학습의 인원수를 입력해주세요.");
+		form.ft_cake.focus();
+		return false;
+	}
+	if (form.ft_date.value == "") {
+		alert("체험 희망날짜를 선택하세요.");
+		form.ft_date.focus();
+		return false;
+	}
+	if (isNaN(form.ft_cake.value)) {
+		alert("케이크를 만들 인원의 숫자만 입력하세요.");
+		form.ft_cake.focus();
+		return false;
+	}
+	if (isNaN(form.ft_cookie.value)) {
+		alert("쿠키를 만들 인원의 숫자만 입력하세요.");
+		form.ft_cookie.focus();
+		return false;
+	}
+}
+</script>
+</head>
  <body>
 	<center>
 	<div id="wrap">
@@ -44,6 +113,8 @@
 				<div style="text-align:left">
 					<img src="../images/market/sub05_img01.jpg" style="margin-bottom:30px;" />
 				</div>
+				<form name="bcFrm" method="post" action="FTProcess.jsp"
+					onsubmit="return validateForm(this);">
 				<table cellpadding="0" cellspacing="0" border="0" class="con_table" style="width:100%;">
 					<colgroup>
 						<col width="25%" />
@@ -52,75 +123,56 @@
 					<tbody>
 						<tr>
 							<th>고객명/회사명</th>
-							<td style="text-align:left;"><input type="text" name=""  value="" class="join_input" /></td>
-						</tr>
-						<tr>
-							<th>장애유무</th>
-							<td style="text-align:left;" style="padding:0px;">
-								<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
-									<tr>
-										<td style="border-bottom:0px;"><input type="radio" name=""  value="" /> 유&nbsp;&nbsp;&nbsp;<input type="radio" name=""  value="" /> 무</td>
-										<th style="border-bottom:0px;" width="100px">주요장애유형</th>
-										<td style="border-right:0px; border-bottom:0px;"><input type="text" name=""  value="" class="join_input" /></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<th>보장구 사용유무</th>
-							<td style="text-align:left;" style="padding:0px;">
-								<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
-									<tr>
-										<td style="border-bottom:0px;"><input type="radio" name=""  value="" /> 유&nbsp;&nbsp;&nbsp;<input type="radio" name=""  value="" /> 무</td>
-										<th style="border-bottom:0px;" width="100px">보장구 명</th>
-										<td style="border-right:0px; border-bottom:0px;"><input type="text" name=""  value="" class="join_input" /></td>
-									</tr>
-								</table>
-							</td>
+							<td style="text-align:left;"><input type="text" name="name"  value="" class="join_input" /></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td style="text-align:left;"><input type="text" name=""  value="" class="join_input" style="width:50px;" /> - <input type="text" name=""  value="" class="join_input" style="width:50px;" /> - <input type="text" name=""  value="" class="join_input" style="width:50px;" /></td>
-						</tr>
-						<tr>
-							<th>담당자 휴대전화</th>
-							<td style="text-align:left;"><input type="text" name=""  value="" class="join_input" style="width:50px;" /> - <input type="text" name=""  value="" class="join_input" style="width:50px;" /> - <input type="text" name=""  value="" class="join_input" style="width:50px;" /></td>
+							<td style="text-align:left;">
+								<input type="text" name="phone_num1"  value="" class="join_input" style="width:50px;" /> - 
+								<input type="text" name="phone_num2"  value="" class="join_input" style="width:50px;" /> - 
+								<input type="text" name="phone_num3"  value="" class="join_input" style="width:50px;" />
+							</td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td style="text-align:left;"><input type="text" name=""  value="" class="join_input" style="width:100px;" /> @ <input type="text" name=""  value="" class="join_input" style="width:100px;" /></td>
+							<td style="text-align:left;">
+								<input type="text" name="email1"  value="" class="join_input" style="width:100px;" /> @
+								<input type="text" name="email2"  value="" class="join_input" style="width:100px;" />
+							</td>
 						</tr>
 						<tr>
 							<th>체험내용</th>
 							<td style="text-align:left;" style="padding:0px;">
 								<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
 									<tr>
-										<td>케익체험</td>
-										<td style="border-right:0px;"><input type="text" name=""  value="" class="join_input" /></td>
+										<td style="">케익체험</td>
+										<td style="border-right:0px;">
+										<input type="text" name="ft_cake" value="" class="join_input" style="width: 50px; text-align: right;" placeholder="0" /> 명</td>
 									</tr>
 									<tr>
-										<td style="border-bottom:0px;">쿠키체험</td>
-										<td style="border:0px;"><input type="text" name=""  value="" class="join_input" /></td>
+										<td style="border-bottom:0px; width: 70px;">쿠키체험</td>
+										<td style="border:0px;"><input type="text" name="ft_cookie" value="" class="join_input" style="width: 50px; text-align: right;" placeholder="0" /> 명</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
 						<tr>
 							<th>체험희망날짜</th>
-							<td style="text-align:left;"><input type="text" name=""  value="" class="join_input" /></td>
+							<td style="text-align:left;"><input type="text" name="ft_date"  value="" class="join_input" id="datepicker" /></td>
 						</tr>
 						<tr>
 							<th>접수종류 구분</th>
-							<td style="text-align:left;"><input type="radio" name=""  value="" /> 예약신청
-&nbsp;&nbsp;&nbsp;<input type="radio" name=""  value="" /> 견적문의</td>
+							<td style="text-align:left;"><input type="radio" name="regi_type"  value="예약신청" checked /> 예약신청
+							&nbsp;&nbsp;&nbsp;<input type="radio" name="regi_type"  value="견적문의" /> 견적문의</td>
 						</tr>
 						<tr>
 							<th>기타특이사항</th>
-							<td style="text-align:left;"><input type="text" name=""  value="" class="join_input" style="width:400px;" /></td>
+							<td style="text-align:left;"><input type="text" name="note"  value="" class="join_input" style="width:400px;" placeholder="없음" /></td>
 						</tr>
 					</tbody>
 				</table>
-				<p style="text-align:center; margin-bottom:40px"><a href=""><img src="../images/btn01.gif" /></a>&nbsp;&nbsp;<a href="#"><img src="../images/btn02.gif" /></a></p>
+				<p style="text-align:center; margin-bottom:40px"><input type="image" src="../images/btn01.gif" />&nbsp;&nbsp;<a href="../main/main.jsp"><img src="../images/btn02.gif" /></a></p>
+				</form>
 			</div>
 		</div>
 		<%@ include file="../include/quick.jsp" %>
