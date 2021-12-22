@@ -113,4 +113,40 @@ public class MemberDAO  extends JDBConnect{
 		}
 		return result;
 	}
+public MemberDTO getMemberInfo(String uid, String uname, String umail) {
+        
+    	MemberDTO dto = new MemberDTO();  
+        
+    	String query = "";
+    	
+    	if(uid.equals("")) //아이디 찾기
+    		query = "SELECT * FROM member WHERE name=? AND email=?";
+    	else //비번찾기
+    		query = "SELECT * FROM member WHERE id=? AND name=? AND email=?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            if(uid.equals("")) {
+                psmt.setString(1, uname);
+                psmt.setString(2, umail);
+            }
+        	else {
+        		psmt.setString(1, uid);     
+        		psmt.setString(2, uname);
+        		psmt.setString(3, umail);
+        	}
+              
+            rs = psmt.executeQuery();  
+            if (rs.next()) {
+                dto.setId(rs.getString("id"));
+                dto.setPass(rs.getString("pass"));
+                dto.setName(rs.getString(3));
+                dto.setRegidate(rs.getDate(4));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dto; 
+    }
 }

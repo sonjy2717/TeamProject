@@ -2,6 +2,40 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
 
+<script>
+	//회원정보 입력 확인
+	var validateForm1 = function(frm) {
+		if(frm.name1.value==''){
+            alert('이름을 입력하세요');
+            frm.name1.focus();
+            return false;
+        }
+		if(frm.email1.value==''){
+            alert('이메일를 입력하세요');
+            frm.email1.focus();
+            return false;
+        }
+		
+	}
+	var validateForm2 = function(frm) {
+		if(frm.id.value==''){
+            alert('아이디를 입력하세요');
+            frm.id.focus();
+            return false;
+        }
+		if(frm.name1.value==''){
+            alert('이름을 입력하세요');
+            frm.name1.focus();
+            return false;
+        }
+		if(frm.email1.value==''){
+            alert('이메일를 입력하세요');
+            frm.email1.focus();
+            return false;
+        }
+		
+	}
+</script>
 
  <body>
 	<center>
@@ -20,22 +54,29 @@
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;멤버쉽&nbsp;>&nbsp;아이디/비밀번호찾기<p>
 				</div>
 				<div class="idpw_box">
-					<div class="id_box">
+				<form action="loginSearch_Process.jsp" method="post" name="findFrm"
+				onsubmit="return validateForm1(this);" style="float: left;">
+					<div class="id_box" >
 						<ul>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
+							<li><input type="text" name="name1" value="" class="login_input01" /></li>
+							<li><input type="text" name="email1" value="" class="login_input01" /></li>
 						</ul>
-						<a href=""><img src="../images/member/id_btn01.gif" class="id_btn" /></a>
-						<a href=""><img src="../images/login_btn03.gif" class="id_btn02" /></a>
+						<input type="image" src="../images/member/id_btn01.gif" class="id_btn" name="find"/></a>
+						<a href="join01.jsp"><img src="../images/login_btn03.gif" class="id_btn02" /></a>
 					</div>
-					<div class="pw_box">
+				</form>
+				<div class="idpw_box">
+				<form action="loginSearch_Process.jsp" method="post" name="findFrm"
+				onsubmit="return validateForm2(this);">
+					<div class="pw_box" >
 						<ul>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
+							<li><input type="text" name="id" value="" class="login_input01" /></li>
+							<li><input type="text" name="name1" value="" class="login_input01" /></li>
+							<li><input type="text" name="email1" value="" class="login_input01" /></li>
 						</ul>
-						<a href=""><img src="../images/member/id_btn01.gif" class="pw_btn" /></a>
+						<input type="image" src="../images/member/id_btn01.gif" class="pw_btn" />
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>
