@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import memvership.MemberDAO;
-import memvership.MemberDTO;
+import membership.MemberDAO;
+import membership.MemberDTO;
 import utils.CookieManager;
 
 public class MainServlet extends HttpServlet {

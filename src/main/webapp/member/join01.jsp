@@ -1,7 +1,20 @@
+<%@page import="utils.JSFunction"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<script>
+function ckCheck(Chk) {
+   var chk1=document.Chk.agreement1.checked;
+   if(chk1==""){
+    alert('약관에동의해 주세요');
+    Chk.agreement1.focus();
+   
+    return false;
+   }
+}
 
+
+</script>
 
  <body>
 	<center>
@@ -476,11 +489,12 @@
 				<br />
 				회사의 개인정보보호정책은 관련 법률 및 고시의 변경 또는 내부 운영방침의 변경에 따라 변경될 수 있습니다. 회사의 개인정보보호정책이 수정될 경우 변경된 사항은 홈페이지를 통하여 공지합니다. <br />
 				</div>
-
+			<form name="Chk" method="post" action="join02.jsp"
+					onsubmit="return ckCheck(this);">
 				<p style="text-align:center; margin-bottom:20px;"><input type="checkbox" name="agreement1" value="">이용약관과 개인정보취급방침에 동의합니다.</p>
 
-				<p style="text-align:center; margin-bottom:20px"><a href="join02.jsp"><img src="../images/btn01.gif" /></a>&nbsp;&nbsp;<a href="#"><img src="../images/btn02.gif" /></a></p>
-
+				<p style="text-align:center; margin-bottom:20px"><input type="image" name="btn01"  src="../images/btn01.gif">&nbsp;&nbsp;<a href="#"><img src="../images/btn02.gif" /></a></p>
+			</form>
 
 			</div>
 		</div>
