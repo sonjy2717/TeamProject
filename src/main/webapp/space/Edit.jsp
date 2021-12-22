@@ -79,9 +79,11 @@ function validateForm(form){
 				<div>
 
 
-<form name="writeFrm" method= "post" action="WriteProcess.jsp" onsubmit="return validateForm(this);">
+<form name="writeFrm"  enctype="multipart/form-data" method= "post" action="EditProcess.jsp" onsubmit="return validateForm(this);">
 <input type="hidden"  name="idx" value="<%=dto.getIdx() %>"/> 
 <input type="hidden" name="tname" value="<%=dto.getTname() %>" />
+<input type="hidden" name="prevOfile" value="<%=dto.getOfile() %>" />
+<input type="hidden" name="prevSfile" value="<%=dto.getSfile() %>" />
 <table class="table table-bordered">
 <colgroup>
 	<col width="20%"/>
@@ -92,16 +94,30 @@ function validateForm(form){
 		<th class="text-center" 
 			style="vertical-align:middle;" >제목</th>
 		<td>
-			<input type="text" name="title" class="form-control" />
+			<input type="text" name="title" value=<%=dto.getTitle() %> class="form-control" />
 		</td>
 	</tr>
 	<tr>
 		<th class="text-center" 
 			style="vertical-align:middle;">내용</th>
 		<td>
-			<textarea rows="10" name="content" class="form-control"></textarea>
+			<textarea rows="10" name="content" class="form-control"><%=dto.getContent() %></textarea>
 		</td>
 	</tr>
+	<%
+		if(tname.equals("정보")|| tname.equals("사진")){
+		%>
+		<tr>
+		<th class="text-center" 
+					style="vertical-align:middle;">첨부파일</th>
+			<td>
+				<input type="file" name="attachedFile"/><br />
+			</td>
+		</tr>
+					
+		<%
+	 } 
+					%>
 </tbody>
 </table>
 

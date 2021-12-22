@@ -11,7 +11,6 @@
 <%@ include file="./IsLoggedIn.jsp" %>  
 <%
 //폼값 받기
-
 try{
 	
 	String saveDirectory = application.getRealPath("/Uploads"); //저장 물리적 경로
@@ -20,45 +19,58 @@ try{
 	
 	MultipartRequest mr = new MultipartRequest(request,saveDirectory, maxPostSize, encoding);
 	
-	String fileName = mr.getFilesystemName("attachedFile");
-	String ext = fileName.substring(fileName.lastIndexOf("."));
-	String now = new SimpleDateFormat("yyyyMMdd_HmmS").format(new Date());
-	String newFileName = now +ext;
-
-	File oldFile = new File(saveDirectory + File.separator + fileName);
-	File newFile = new File(saveDirectory + File.separator + newFileName);
-	oldFile.renameTo(newFile);
+			//업로드에 성공했다면 폼값을 받아 DTO에 저장
+			if(mr == null) {
+				//경고창을 띄우고 쓰기 페우지로 이동.
+				JSFunction.alertBack("mr생성에 실패하였습니다.", out);
+				return;
+			}
 	
-	String title = mr.getParameter("title");
-	String content = mr.getParameter("content");
-	String tname= mr.getParameter("tname");
+			BoardDTO dto = new BoardDTO();
+			String date = mr.getParameter("datepicker");
+			
+			System.out.println(date);
+			dto.setTitle(mr.getParameter("title"));
+			dto.setContent(mr.getParameter("content"));
+			dto.setCalDate(date);
+			
+			
+			String fileName = mr.getFilesystemName("attachedFile");
+			
+			if(fileName != null) {
+				String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
+				String ext = fileName.substring(fileName.lastIndexOf("."));
+				String newFileName = now + ext;
+				
+				File oldFile = new File(saveDirectory + File.separator + fileName);
+				File newFile = new File(saveDirectory + File.separator + newFileName);
+			
+				oldFile.renameTo(newFile);
+				
+				dto.setOfile(fileName);
+				dto.setSfile(newFileName);
+			}
 	
-	BoardDTO dto = new BoardDTO();
+			BoardDAO dao = new BoardDAO(application);
+			String tname= mr.getParameter("tname");
+			
+			//세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다.
+			//dto.setId(session.getAttribute("UserId").toString());
+			dto.setId("test1");
 	
-	dto.setTitle(title);
-	dto.setContent(content);
-	dto.setOfile(fileName);
-	dto.setSfile(newFileName);
-	//세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다.
-	//dto.setId(session.getAttribute("UserId").toString());
-	dto.setId("test1");
-	
-	BoardDAO dao = new BoardDAO(application);
-	int iResult= dao.insertWrite(dto,tname);
-	//자원해제
-	dao.close();
-
-	//dto객체를 매개변수로 전달하여 레코드 insert 처리
-	if(iResult == 1){
-		//글쓰기에 성공했다면 리스트(목록) 페이지로 이동한다.
-		response.sendRedirect("../main/main.jsp");
-	}else{
-		//실패한 경우에는 글쓰기 페이지로 이동한다. 즉 뒤로 이동한다.
-		JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
-	}
+			int iResult= dao.insertWrite(dto,tname);
+			//자원해제
+			dao.close();
+			//dto객체를 매개변수로 전달하여 레코드 insert 처리
+			if(iResult == 1){
+				//글쓰기에 성공했다면 리스트(목록) 페이지로 이동한다.
+				response.sendRedirect("./sub02_list.jsp");
+			}else{
+				//실패한 경우에는 글쓰기 페이지로 이동한다. 즉 뒤로 이동한다.
+				JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
+			}
 }catch(Exception e){
 	System.out.println("게시물 입력 오류");
 	e.printStackTrace();
 }
-
 %>

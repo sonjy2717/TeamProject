@@ -1,4 +1,5 @@
 <%@page import="java.net.URLEncoder"%>
+<%@page import="utils.BoardPage"%>
 <%@page import="model1.board.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -6,19 +7,22 @@
 <%@page import="model1.board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/global_head.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 부트스트랩의 link-href가 입력되어야 부트스트랩 구문 사용 가능 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+ .main_photo_list{
+ margin-right:5px;
+ }
+</style>
 <%
-String tname = "자유";
-BoardDTO dto2 = new BoardDTO();
-
-dto2.setTname(tname);
 BoardDAO dao = new BoardDAO(application);
 Map<String, Object> param = new HashMap<String, Object>();
 
 //dao.practice(param,"1");
 // List<BoardDTO> boardLists = dao.selectList(param); //모든게시판의 모든 게시물 출력용
+
 
 String idx = request.getParameter("idx");
 // String tnameB = request.getParameter("tname"); 아직까지는 사용되지 않는 문구임
@@ -48,25 +52,14 @@ param.put("end", end);
 /**페이지처리 end**/
 dao.close();
 %>
- <body>
-	<center>
-	<div id="wrap">
-		<%@ include file="../include/top.jsp" %>
-
-		<img src="../images/space/sub_image.jpg" id="main_visual" />
-
-		<div class="contents_box">
-			<div class="left_contents">
-				
-				<%@ include file = "../include/space_leftmenu.jsp" %>
-			</div>
-			<div class="right_contents">
-				<div class="top_title">
-					<img src="../images/space/sub03_title.gif" alt="자유게시판" class="con_title" />
-					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;자유게시판<p>
-				</div>
-			</div>
-			<div class="row">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="row">
 	<!-- 게시판리스트부분 -->
 	<table class="table table-bordered table-hover" >
 	<colgroup>
@@ -78,72 +71,51 @@ dao.close();
 		<col width="50px"/>
 	</colgroup>
 	
-
-	<thead>
-	<tr class="success">
-		<th class="text-center">번호</th>
-		<th class="text-left"><a href="sub01_view.jsp">제목</a></th>
-		<th class="text-center">작성자</th>
-		<th class="text-center">작성일</th>
-		<th class="text-center">조회수</th>
-		<th class="text-center">첨부</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	<!-- 리스트반복 -->
-	
-	<tr>
-		<td class="text-center">번호</td>
-		<td class="text-left"><a href="sub01_view.jsp">제목</a></td>
-		<td class="text-center">작성자</td>
-		<td class="text-center">작성일</td>
-		<td class="text-center">조회수</td>
-		<td class="text-center">첨부</td>
-	</tr>
 		<%
-			if(boardLists.isEmpty()){
+		if(boardLists.isEmpty()){
 		%>
-			<tr>
-				<td colspan= "5" align = "center">
-					등록된 게시물이 없습니다^^*
-				</td>
+		<tr>
+		<td colspan= "5" align = "center">
+				등록된 게시물이 없습니다^^*
+		</td>
 			</tr>
 			<%
 			}else{	
+				int flagNum = 0;
 				int virtualNum = 0; //게시물의 출력번호
 				int countNum=0;
 				//확장 for문을 통해 List컬렉션에 저장된 레코드의 갯수만큼 반복한다.a
+				
 				for(BoardDTO dto: boardLists){
 					//레코드 번호 설정
 					virtualNum = totalCount--;
 				%>
-				<tr>
-					<td class="text-center"><%=virtualNum %></td>
-						<td class="text-left"><a href="sub01_view.jsp?idx=<%=dto.getIdx()%>&tname=<%=tname%>"><%=dto.getTitle() %></a></td>
-						<td class="text-center"><%=dto.getId() %></td>
-						<td class="text-center"><%=dto.getPostdate() %></td>
-						<td class="text-center"><%=dto.getVisitcount()%></td>
-						<td class="text-center">
-						<%
-						if(dto.getOfile()!=null){
-						%>
-							<a href="Download.jsp?oName=<%=URLEncoder.encode(dto.getOfile(),"UTF-8")%>&sName=<%=URLEncoder.encode(dto.getSfile(),"UTF-8")%>">[다운로드]</a>
-						<img src="../Uploads/<%= dto.getSfile() %>" width="150">
-						<% 	
-						}
-						%>
-						</td>
-				</tr>
 				<%
+					if(dto.getOfile()!=null){
+				%>
+					<div class="col-3">
+					<a href="sub01_view.jsp?idx=<%=dto.getIdx()%>&tname=<%=tname%>"><img src="../Uploads/<%= dto.getSfile() %>" style= "border:1px solid #cecece; width:200; height:200"></a>
+					</div>
+						
+				<% 	
 					}
+				%>
+				<% 	
+					}
+				%>
+				
+				
+				<%
 				}
 				%>
+				
+				
+					
+				
 
-	</tbody>
+	
 	</table>
 </div>
-
 <div class="row mb-3" style="padding-right:50px;">
 	<div class="col d-flex justify-content-end">
 	<!-- 각종 버튼 부분 -->
@@ -172,11 +144,12 @@ dao.close();
 	</ul>	
 </div>
 
-
+				</div>
+			</div>
 		</div>
-			<%@ include file="../include/quick.jsp" %>
+		<%@ include file="../include/quick.jsp" %>
 	</div>
-	
+
 
 	<%@ include file="../include/footer.jsp" %>
 	</center>

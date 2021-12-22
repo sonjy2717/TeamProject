@@ -131,9 +131,37 @@ public class BoardDAO extends JDBConnect{
 				dto.setVisitcount(rs.getString("visitcount"));
 				dto.setSfile(rs.getString("sfile"));
 				dto.setOfile(rs.getString("ofile"));
+				dto.setCalDate("caldate");
 				
 				System.out.println("파일명:"+rs.getString("sfile"));
 				
+				
+				bbs.add(dto);
+			}	
+		}
+		catch(Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return bbs;
+	}
+	
+	public List<BoardDTO> selectCal(Map<String, Object> map, String tName){ //선택한 게시판의 모든게시물 출력용
+		List<BoardDTO> bbs =  new Vector<BoardDTO>();
+
+		String query =  "SELECT caldate, title FROM board WHERE tName ='"+tName+"' and caldate is not null";
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+		
+			while(rs.next()) {
+				
+				BoardDTO dto = new BoardDTO();	
+				dto.setTitle(rs.getString("title"));
+				dto.setCalDate("caldate");
+				System.out.println(rs.getString("title") );
 				
 				bbs.add(dto);
 			}	
@@ -153,9 +181,9 @@ public class BoardDAO extends JDBConnect{
 		try {
 			
 			String query = " INSERT INTO board ( "
-					 + " idx, title ,content , id,visitcount, tname, ofile, sfile) "
+					 + " idx, title ,content , id,visitcount, tname, ofile, sfile, caldate) "
 					 + " VALUES ( "
-					 + " seq_board_num.NEXTVAL, ?, ?, ?,0,?,?,?)";
+					 + " seq_board_num.NEXTVAL, ?, ?, ?,0,?,?,?,?)";
 			//동적쿼리문 실행을 위한 prepared객체 생성.
 			psmt= con.prepareStatement(query);
 			//순서대로 인파라미터 설정.
@@ -165,6 +193,7 @@ public class BoardDAO extends JDBConnect{
 			psmt.setString(4, tname);
 			psmt.setString(5, dto.getOfile());
 			psmt.setString(6, dto.getSfile());
+			psmt.setString(7, dto.getCalDate());
 			//쿼리문 실행 : 입력에 성공한다면 1이 반환된다. 실패시 0반환.
 			result = psmt.executeUpdate();
 			}
@@ -180,7 +209,7 @@ public class BoardDAO extends JDBConnect{
         try {
             
             String query = "UPDATE board SET "
-                         + " title=?, content=? "
+                         + " title=?, content=?, ofile=?, sfile=? "
                          + " WHERE idx=?";
             
            
@@ -188,7 +217,9 @@ public class BoardDAO extends JDBConnect{
           
             psmt.setString(1, dto.getTitle());
             psmt.setString(2, dto.getContent());
-            psmt.setString(3, dto.getIdx());
+            psmt.setString(3, dto.getOfile());
+            psmt.setString(4, dto.getSfile());
+            psmt.setString(5, dto.getIdx());
             
            
             result = psmt.executeUpdate();
@@ -207,15 +238,16 @@ public class BoardDAO extends JDBConnect{
 		
 		try {
 			
-			String query = " UPDATE board SET title=?, content=? WHERE idx=? ";
+			String query = " UPDATE board SET title=?, content=?,ofile=?,sfile=? WHERE idx=? ";
 			
 			// prepared 객체 생성
             psmt = con.prepareStatement(query);
             //인파라미터 설정
             psmt.setString(1, dto.getTitle());
             psmt.setString(2, dto.getContent());
-            psmt.setString(3, dto.getIdx());
-            
+            psmt.setString(3, dto.getOfile());
+            psmt.setString(4, dto.getSfile());
+            psmt.setString(5, dto.getIdx());
             // 쿼리 실행 
             result = psmt.executeUpdate();
 			
@@ -288,4 +320,24 @@ public class BoardDAO extends JDBConnect{
         
         return result; 
     }
+	public String calendarT(String ti) {
+		String cal="";
+		try
+		{
+			String query = " SELECT caldate FROM board WHERE idx=?";
+			
+			psmt = con.prepareStatement(query); 
+            psmt.setString(1, ti); 
+            rs = psmt.executeQuery();
+            
+            if (rs.next()) {
+				cal =   rs.getString("caldate");
+            }
+		}catch (Exception e) {
+            System.out.println("게시물 삭제 중 예외 발생");
+            e.printStackTrace();
+        }
+	
+		return cal;
+	}
 }

@@ -6,7 +6,7 @@
 
 <%
 //폼값 받기
-String idx=request.getParameter("idx"); 
+String idx=request.getParameter("idx");
 
 //DTO객체와 DB 연결 및 기존 게시물 가져오기
 BoardDTO dto = new BoardDTO();
@@ -25,7 +25,7 @@ if(sessionId.equals(dto.getId())){
 	
 	if(delResult == 1){
 		//게시물 삭제에 성공하면 리스트로 이동한다.
-		JSFunction.alertLocation("삭제되었습니다.", "../main/main.jsp",out); //실험용
+		JSFunction.alertLocation("삭제되었습니다.", "./sub01.jsp",out); //실험용
 	}
 	else{
 		JSFunction.alertBack("삭제에 실패하였습니다.", out);
