@@ -111,4 +111,10 @@
  	<param-name>POSTS_PER_BLOCK</param-name>
  	<param-value>3</param-value>
  </context-param>
+ 
+ <!-- 첨부파일의 제한 용량 -->
+  <context-param>
+     <param-name>maxPostSize</param-name>
+     <param-value>102400000</param-value>
+  </context-param>
 </web-app>

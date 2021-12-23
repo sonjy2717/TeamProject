@@ -84,8 +84,8 @@
 			                <a href="../community/view.do?tname=step&idx=${ row.idx }">${ row.title }</a> 
 			            </td> 
 			            <td>${ row.id }</td><!-- 작성자 -->  
-			            <td>${ row.visitcount }</td><!-- 조회수 -->  
 			            <td>${ row.postdate }</td><!-- 작성일 -->  
+			            <td>${ row.visitcount }</td><!-- 조회수 -->  
 			            <td><!-- 첨부파일 -->   
 			            <c:if test="${ not empty row.ofile }">
 			                <a href="../community/download.do?tname=step&ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[다운로드]</a>
@@ -98,7 +98,7 @@
 			    </table>
 				<div class="mb-3" style="padding-right:50px;">
 					<div class="col d-flex justify-content-end" style="margin-left: 650px;">
-						<button type="button" class="btn btn-info btn-sm"
+						<button type="button" class="btn btn-danger btn-sm"
 							onclick="location.href='../community/write.do?tname=step';">글쓰기</button>
 					</div>
 					<!-- 페이징 처리 -->

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utils.BoardPage;
+import utils.MVCBoardPage;
 
 @WebServlet("/community/list.do")
 public class ListController extends HttpServlet {
@@ -24,6 +25,8 @@ public class ListController extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 해당 게시물을 불러옴
 		String tname = req.getParameter("tname");
+//		확인용
+		System.out.println("ListController : "+tname);
 		
 		//검색어 관련 파라미터
         String searchField = req.getParameter("searchField");
@@ -63,8 +66,8 @@ public class ListController extends HttpServlet {
         dao.close();
         
         // 페이지 번호를 생성하기 위해 메소드 호출
-        String pagingImg = BoardPage.pagingStr(totalCount, pageSize,
-        		blockPage, pageNum, "../community/list.do");
+        String pagingImg = MVCBoardPage.pagingStr(totalCount, pageSize,
+        		blockPage, pageNum, "../community/list.do", tname);
         // View로 전달할 데이터를 Map컬렉션에 저장
         map.put("pagingImg", pagingImg);//페이지 번호
         map.put("totalCount", totalCount);//전체 게시물의 갯수

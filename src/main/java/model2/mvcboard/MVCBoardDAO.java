@@ -14,7 +14,7 @@ public class MVCBoardDAO extends DBConnPool {
 	// 게시물 개수 카운트
 	public int selectCount(Map<String, Object> map, String tname) {
 		int totalCount = 0;
-		String query =  "SELECT * FROM board WHERE tname ='"+tname+"'";
+		String query =  "SELECT COUNT(*) FROM board WHERE tname ='"+tname+"'";
 		if (map.get("searchWord") != null) {
             query += " WHERE " + map.get("searchField") + " "
                    + " LIKE '%" + map.get("searchWord") + "%'";
@@ -39,24 +39,23 @@ public class MVCBoardDAO extends DBConnPool {
 		String query = " "
                 + "SELECT * FROM "
                 + "		( SELECT Tb.*, ROWNUM rNum FROM "
-                + "			( SELECT * FROM board ";
+                + "			( SELECT * FROM board WHERE tname=?";
 		// 검색어가 있는경우
         if (map.get("searchWord") != null)
         {
-            query += " WHERE " + map.get("searchField")
-                   + " LIKE '%" + map.get("searchWord") + "%' "
-                   + " AND tname=?";
+            query += " AND " + map.get("searchField")
+                   + " LIKE '%" + map.get("searchWord") + "%' ";
         }
-		query += "        ORDER BY idx DESC "
+        	query += "        ORDER BY idx DESC "
 	               + "    ) Tb "
 	               + " ) "
 	               + " WHERE rNum BETWEEN ? AND ?";
 		
 		try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, map.get("start").toString());
-            psmt.setString(2, map.get("end").toString());
-            psmt.setString(3, tname);
+            psmt.setString(1, tname);
+            psmt.setString(2, map.get("start").toString());
+            psmt.setString(3, map.get("end").toString());
             rs = psmt.executeQuery();
 
             while (rs.next()) {
@@ -71,6 +70,7 @@ public class MVCBoardDAO extends DBConnPool {
                 dto.setSfile(rs.getString(7));
                 dto.setVisitcount(rs.getString(8));
                 dto.setTname(rs.getString(9));
+                dto.setRnum(rs.getString(10));
 
                 board.add(dto);
             }
@@ -80,5 +80,32 @@ public class MVCBoardDAO extends DBConnPool {
             e.printStackTrace();
         }
         return board;
+	}
+	
+	//새로운 게시물에 대한 입력처리
+	public int insertWrite(MVCBoardDTO dto, String tname) {
+		int result = 0;
+		
+		try {
+			String query = "INSERT INTO board ( "
+					+ " idx, id, title, content, ofile, sfile, tname) "
+					+ " VALUES ( "
+					+ " seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, tname);
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }
