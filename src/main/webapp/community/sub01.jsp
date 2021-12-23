@@ -88,7 +88,7 @@
 			            <td>${ row.visitcount }</td><!-- 조회수 -->  
 			            <td><!-- 첨부파일 -->   
 			            <c:if test="${ not empty row.ofile }">
-			                <a href="../community/download.do?tname=step&ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[다운로드]</a>
+			                <a href="../community/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[다운로드]</a>
 			            </c:if>
 			            </td>
 			        </tr>
