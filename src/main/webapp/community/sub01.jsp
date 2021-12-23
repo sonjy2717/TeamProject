@@ -25,7 +25,7 @@
 			</div>
 			<!-- 검색 -->
 	        <div class="row">
-	            <form method="get" action="../community/list.do">
+	            <form method="get" action="../community/list.do?tname=step">
 	                <div class="input-group ms-auto" style="width: 400px;">
 	                    <select name="searchField" class="form-control">
 	                         <option value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
@@ -81,14 +81,14 @@
 			                ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}   
 			            </td>
 			            <td align="left"><!-- 제목 -->   
-			                <a href="../community/view.do?idx=${ row.idx }">${ row.title }</a> 
+			                <a href="../community/view.do?tname=step&idx=${ row.idx }">${ row.title }</a> 
 			            </td> 
 			            <td>${ row.id }</td><!-- 작성자 -->  
 			            <td>${ row.visitcount }</td><!-- 조회수 -->  
 			            <td>${ row.postdate }</td><!-- 작성일 -->  
 			            <td><!-- 첨부파일 -->   
 			            <c:if test="${ not empty row.ofile }">
-			                <a href="../community/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[다운로드]</a>
+			                <a href="../community/download.do?tname=step&ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[다운로드]</a>
 			            </c:if>
 			            </td>
 			        </tr>
@@ -99,7 +99,7 @@
 				<div class="mb-3" style="padding-right:50px;">
 					<div class="col d-flex justify-content-end" style="margin-left: 650px;">
 						<button type="button" class="btn btn-info btn-sm"
-							onclick="location.href='../community/write.do';">글쓰기</button>
+							onclick="location.href='../community/write.do?tname=step';">글쓰기</button>
 					</div>
 					<!-- 페이징 처리 -->
 					${ map.pagingImg }

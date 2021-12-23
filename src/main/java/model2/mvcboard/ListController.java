@@ -22,6 +22,8 @@ public class ListController extends HttpServlet {
 		MVCBoardDAO dao = new MVCBoardDAO();
 		// 파라미터 및 View로 전달할 데이터 저장용 Map컬렉션 생성
 		Map<String, Object> map = new HashMap<String, Object>();
+		// 해당 게시물을 불러옴
+		String tname = req.getParameter("tname");
 		
 		//검색어 관련 파라미터
         String searchField = req.getParameter("searchField");
@@ -33,7 +35,7 @@ public class ListController extends HttpServlet {
         }
         
 		// 게시물 개수 카운트
-		int totalCount = dao.selectCount(map);
+		int totalCount = dao.selectCount(map, tname);
 		
 		/* 페이징 처리 start */
 		// web.xml에 접근하기 위해 서블릿에서 application 내장객체를 얻어옴
@@ -56,7 +58,7 @@ public class ListController extends HttpServlet {
         /* 페이지 처리 end */
         
         // 현재 페이지에 출력할 게시물을 얻어옴
-        List<MVCBoardDTO> boardLists = dao.selectListPage(map);
+        List<MVCBoardDTO> boardLists = dao.selectListPage(map, tname);
         // 커넥션풀에 자원 반납
         dao.close();
         

@@ -12,9 +12,9 @@ public class MVCBoardDAO extends DBConnPool {
 	}
 	
 	// 게시물 개수 카운트
-	public int selectCount(Map<String, Object> map) {
+	public int selectCount(Map<String, Object> map, String tname) {
 		int totalCount = 0;
-		String query = "SELECT COUNT(*) FROM board";
+		String query =  "SELECT * FROM board WHERE tname ='"+tname+"'";
 		if (map.get("searchWord") != null) {
             query += " WHERE " + map.get("searchField") + " "
                    + " LIKE '%" + map.get("searchWord") + "%'";
@@ -33,7 +33,7 @@ public class MVCBoardDAO extends DBConnPool {
 	}
 	
 	// 현재 페이지에 출력할 게시물을 얻어옴
-	public List<MVCBoardDTO> selectListPage(Map<String,Object> map) {
+	public List<MVCBoardDTO> selectListPage(Map<String,Object> map, String tname) {
 		List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
 		
 		String query = " "
