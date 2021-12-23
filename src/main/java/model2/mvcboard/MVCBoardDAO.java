@@ -12,9 +12,13 @@ public class MVCBoardDAO extends DBConnPool {
 	}
 	
 	// 게시물 개수 카운트
-	public int selectCount() {
+	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 		String query = "SELECT COUNT(*) FROM board";
+		if (map.get("searchWord") != null) {
+            query += " WHERE " + map.get("searchField") + " "
+                   + " LIKE '%" + map.get("searchWord") + "%'";
+        }
         try {
         	stmt = con.createStatement();
         	rs = stmt.executeQuery(query);
@@ -36,7 +40,13 @@ public class MVCBoardDAO extends DBConnPool {
                 + "SELECT * FROM ( "
                 + "    SELECT Tb.*, ROWNUM rNum FROM ( "
                 + "        SELECT * FROM board ";
-		
+		// 검색어가 있는경우
+        if (map.get("searchWord") != null)
+        {
+            query += " WHERE " + map.get("searchField")
+                   + " LIKE '%" + map.get("searchWord") + "%' ";
+        }
+
 		query += "        ORDER BY idx DESC "
 	               + "    ) Tb "
 	               + " ) "

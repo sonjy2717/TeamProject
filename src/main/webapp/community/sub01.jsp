@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
  <body>
 	<center>
 	<div id="wrap">
@@ -22,7 +23,22 @@
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;커뮤니티&nbsp;>&nbsp;직원자료실<p>
 				</div>
 			</div>
-			
+			<!-- 검색 -->
+	        <div class="row">
+	            <form method="get" action="../community/list.do">
+	                <div class="input-group ms-auto" style="width: 400px;">
+	                    <select name="searchField" class="form-control">
+	                         <option value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
+	                         <option value="content">내용</option>
+	                         <option value="id">작성자</option>
+                     	</select>
+                     <input type="text" name="searchWord" class="form-control" placeholder="Search" style="width: 200px;">
+                     <button class="btn btn-success" type="submit">
+                     <i class="bi-search" style="font-size: 1rem; color: white;"></i>
+                     </button>
+                    </div>
+                </form>
+            </div>
 			<!-- 게시판리스트부분 -->
 			<div class="row">
 				<table class="table table-bordered table-hover" >
