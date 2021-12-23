@@ -37,16 +37,16 @@ public class MVCBoardDAO extends DBConnPool {
 		List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
 		
 		String query = " "
-                + "SELECT * FROM ( "
-                + "    SELECT Tb.*, ROWNUM rNum FROM ( "
-                + "        SELECT * FROM board ";
+                + "SELECT * FROM "
+                + "		( SELECT Tb.*, ROWNUM rNum FROM "
+                + "			( SELECT * FROM board ";
 		// 검색어가 있는경우
         if (map.get("searchWord") != null)
         {
             query += " WHERE " + map.get("searchField")
-                   + " LIKE '%" + map.get("searchWord") + "%' ";
+                   + " LIKE '%" + map.get("searchWord") + "%' "
+                   + " AND tname=?";
         }
-
 		query += "        ORDER BY idx DESC "
 	               + "    ) Tb "
 	               + " ) "
@@ -56,6 +56,7 @@ public class MVCBoardDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             psmt.setString(1, map.get("start").toString());
             psmt.setString(2, map.get("end").toString());
+            psmt.setString(3, tname);
             rs = psmt.executeQuery();
 
             while (rs.next()) {
