@@ -27,6 +27,8 @@ try{
 			}
 	
 			BoardDTO dto = new BoardDTO();
+			//세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다.
+			dto.setId(session.getAttribute("user_id").toString());
 			String date = mr.getParameter("datepicker");
 			
 			System.out.println(date);
@@ -54,8 +56,7 @@ try{
 			BoardDAO dao = new BoardDAO(application);
 			String tname= mr.getParameter("tname");
 			
-			//세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다.
-			dto.setId(session.getAttribute("UserId").toString());
+		
 			
 	
 			int iResult= dao.insertWrite(dto,tname);
@@ -64,7 +65,7 @@ try{
 			//dto객체를 매개변수로 전달하여 레코드 insert 처리
 			if(iResult == 1){
 				//글쓰기에 성공했다면 리스트(목록) 페이지로 이동한다.
-				response.sendRedirect("./sub02_list.jsp");
+				response.sendRedirect("./sub02.jsp");
 			}else{
 				//실패한 경우에는 글쓰기 페이지로 이동한다. 즉 뒤로 이동한다.
 				JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
