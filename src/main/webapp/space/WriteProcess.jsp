@@ -55,8 +55,8 @@ try{
 			String tname= mr.getParameter("tname");
 			
 			//세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다.
-			//dto.setId(session.getAttribute("UserId").toString());
-			dto.setId("test1");
+			dto.setId(session.getAttribute("UserId").toString());
+			
 	
 			int iResult= dao.insertWrite(dto,tname);
 			//자원해제
