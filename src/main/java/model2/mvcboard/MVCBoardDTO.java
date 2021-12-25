@@ -11,7 +11,14 @@ public class MVCBoardDTO {
 	private String sfile; //저장파일
 	private String visitcount; //조회수
 	private String tname; // 게시판 이름
+	private String rnum; // 게시물 번호
 	
+	public String getRnum() {
+		return rnum;
+	}
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
 	public String getIdx() {
 		return idx;
 	}

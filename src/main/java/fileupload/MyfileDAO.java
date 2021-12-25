@@ -13,15 +13,14 @@ public class MyfileDAO extends DBConnPool {
         int applyResult = 0;
         try {
         	//1.쿼리문 작성
-            String query = "INSERT INTO myfile ( "
-                + " idx, name, title, cate, ofile, sfile) "
+            String query = "INSERT INTO board ( "
+                + " idx, id, title, ofile, sfile) "
                 + " VALUES ( "
                 + " seq_board_num.nextval, ?, ?, ?, ?, ?)";
             //2.prepared객체 생성 및 인파라미터 설정
             psmt = con.prepareStatement(query);
-            psmt.setString(1, dto.getName());
+            psmt.setString(1, dto.getId());
             psmt.setString(2, dto.getTitle());
-            psmt.setString(3, dto.getCate());
             psmt.setString(4, dto.getOfile());
             psmt.setString(5, dto.getSfile());
             //3.쿼리실행
