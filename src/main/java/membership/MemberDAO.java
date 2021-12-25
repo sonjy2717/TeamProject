@@ -113,7 +113,9 @@ public class MemberDAO  extends JDBConnect{
 		}
 		return result;
 	}
-public MemberDTO getMemberInfo(String uid, String uname, String umail) {
+	public MemberDTO getMemberInfo(String uid, String uname, String umail) {
+	
+		
         
     	MemberDTO dto = new MemberDTO();  
         
@@ -142,6 +144,38 @@ public MemberDTO getMemberInfo(String uid, String uname, String umail) {
                 dto.setPass(rs.getString("pass"));
                 dto.setName(rs.getString(3));
                 dto.setRegidate(rs.getDate(4));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dto; 
+    }
+	public MemberDTO getMemberInfo(String uid) {
+
+        MemberDTO dto = new MemberDTO();
+
+        String query = "";
+
+        query = "SELECT * FROM member WHERE id=? ";
+
+
+        try {
+            psmt = con.prepareStatement(query);
+
+            psmt.setString(1, uid);
+
+
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                dto.setId(rs.getString("id"));
+                dto.setPass(rs.getString("pass"));
+                dto.setName(rs.getString("name"));
+                dto.setPhone_num(rs.getString("phone_num"));
+                dto.setEmail(rs.getString("email"));
+                dto.setPostcode(rs.getString("postcode"));
+                dto.setBasicadd(rs.getString("basicadd"));
+                dto.setDetailadd(rs.getString("detailadd"));
             }
         }
         catch (Exception e) {
