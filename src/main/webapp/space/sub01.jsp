@@ -185,8 +185,15 @@ dao.close();
 	<div class="col d-flex justify-content-end">
 	<!-- 각종 버튼 부분 -->
 	<!-- <button type="reset" class="btn">Reset</button> -->
-	
+	 <%
+            if(session.getAttribute("user_id") != null
+            && session.getAttribute("user_id").toString().equals("admin")){
+            %> 
 	<button type="button" class="btn btn-info"  onclick="location.href='sub01_write.jsp?tname=<%=tname%>';">글쓰기</button>
+	
+	<%
+       }
+	%>
 	<button type="button" class="btn btn-warning">리스트보기</button>
 				
 	<!-- <button type="button" class="btn btn-primary">수정하기</button>

@@ -263,7 +263,14 @@ dto2.setTname(tname);
 	<!-- 각종 버튼 부분 -->
 	<!-- <button type="reset" class="btn">Reset</button> -->
 	 <!-- <button type="button" onclick="location.href='sub02_write.jsp';">글쓰기</button> -->
+	 <%
+            if(session.getAttribute("user_id") != null
+            && session.getAttribute("user_id").toString().equals("admin")){
+            %> 
 	<button type="button" class="btn btn-info"  onclick="location.href='sub02_write.jsp';" style="margin:10px">글쓰기</button>
+	<%
+        }
+	%>
 	<!-- css넣으면 위에 월 버튼이 사라짐 -->
 	</div>
 </div>
