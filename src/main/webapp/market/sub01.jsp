@@ -11,19 +11,19 @@ function basket(idx, price) {
 	
 	form.idx.value = idx;
 	form.price.value = price;
-	form.method = "get";
+	form.method = "post";
 	form.action = "../market/basket.do";
 	form.submit();
 }
-function buy(idx, price) {
+/* function buy(idx, price) {
 	var form = document.frm;
 	
 	form.idx.value = idx;
 	form.price.value = price;
-	form.method = "get";
+	form.method = "post";
 	form.action = "../market/buy.do";
 	form.submit();
-}
+} */
 </script>
 
  <body>
@@ -43,7 +43,7 @@ function buy(idx, price) {
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린장터&nbsp;>&nbsp;수아밀 제품 주문<p>
 				</div>
 				<form name="frm">
-				<input type="hidden" name="id" value="test계정" />
+				<input type="hidden" name="id" value="test1" />
 				<input type="hidden" name="idx" value="" />
 				<input type="hidden" name="price" value="" />
 				<table cellpadding="0" cellspacing="0" border="0" class="market_board01">
@@ -88,8 +88,8 @@ function buy(idx, price) {
 						</td>
 						<td><img src="../images/market/j_icon.gif" />${ row.point }원</td>
 						<td>
-							<button type="button" onclick="buy('${ row.idx }', '${ row.price }');"><img src="../images/market/btn01.gif" /></button>
-							<button type="button" onclick="basket('${ row.idx }', '${ row.price }');"><img src="../images/market/btn02.gif" /></button>
+							<img src="../images/market/btn01.gif" onclick="buy('${ row.idx }', '${ row.price }');" />
+							<img src="../images/market/btn02.gif" onclick="basket('${ row.idx }', '${ row.price }');" />
 						</td>
 					</tr>
 					</c:forEach>

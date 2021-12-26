@@ -3,6 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/global_head.jsp" %>
 
+<script>
+function edit(idx) {
+	var form = document.frm;
+	var choice_count = document.getElementById("count_"+idx).value;
+	
+	frm.basket_idx.value = idx;
+	frm.basket_count.value = choice_count;
+	
+	if (choice_count <= 0) {
+		alert("수량은 0개 이하로 설정할 수 없습니다.");
+		return;
+	}
+	
+	form.method = "post";
+	form.action = "../market/edit.do?";
+	form.submit();
+}
+
+function deleteList() {
+	
+}
+</script>
+
  <body>
 	<center>
 	<div id="wrap">
@@ -20,6 +43,10 @@
 					<img src="../images/market/sub01_title.gif" alt="수아밀 제품 주문" class="con_title" />
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린장터&nbsp;>&nbsp;수아밀 제품 주문<p>
 				</div>
+				<form name="frm">
+				<input type="hidden" name="id" value="test1" />
+				<input type="hidden" name="basket_idx" value="" />
+				<input type="hidden" name="basket_count" value="" />
 				<table cellpadding="0" cellspacing="0" border="0" class="basket_list">
 					<colgroup>
 						<col width="7%" />
@@ -67,22 +94,25 @@
 							<td>${ row.price }원</td>
 							<td><img src="../images/market/j_icon.gif" />${ row.point }원</td>
 							<td>
-								<input type="number" name="count" value="1" class="basket_num" />&nbsp;
-								<button type="button" onclick="edit();"><img src="../images/market/m_btn.gif" /></button>
+								<input type="number" id="count_${ row.idx }" value="${ row.count }" class="basket_num" style="width: 40px;"/>&nbsp;
+								<img src="../images/market/m_btn.gif" onclick="edit('${ row.idx }');" />
 							</td>
 							<td>무료배송</td>
-							<td>[조건]</td>
-							<td><span>${ row.price }</span></td>
+							<td>[무료]</td>
+							<td><span>${ row.total }</span></td>
 						</tr>
 						</c:forEach>
 					</c:otherwise>
 					</c:choose>
 					</tbody>
 				</table>
-				<p class="basket_text">합계 : <span class="money">137,000원</span>
-				<br /><br />
-				<a href="../market/list.do"><img src="../images/market/basket_btn01.gif" /></a>&nbsp;
-				<a href="../market/buy.do"><img src="../images/market/basket_btn02.gif" /></a>
+				</form>
+				<button style="margin-top: 10px;" type="button" align="left" onclick="deleteList();">선택삭제</button>
+				<p class="basket_text">
+					합계 : ${ total }<span class="money"></span>
+					<br /><br />
+					<a href="../market/list.do"><img src="../images/market/basket_btn01.gif" /></a>&nbsp;
+					<a href="../market/buy.do"><img src="../images/market/basket_btn02.gif" /></a>
 				</p>
 			</div>
 		</div>

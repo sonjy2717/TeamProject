@@ -6,9 +6,9 @@
     
 <%
     String user_id = (String)session.getAttribute("user_id");
-        MemberDAO dao = new MemberDAO(application);
-        MemberDTO dto = dao.getMemberInfo(user_id);
-    %>
+    MemberDAO dao = new MemberDAO(application);
+    MemberDTO dto = dao.getMemberInfo(user_id);
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +27,10 @@
 		<%@ include file="../include/top.jsp"%>
 		
 		<div id="main_visual">
-		<a href="/product/sub01.jsp"><img src="../images/main_image_01.jpg" /></a><a href="/product/sub01_02.jsp"><img src="../images/main_image_02.jpg" /></a><a href="/product/sub01_03.jsp"><img src="../images/main_image_03.jpg" /></a><a href="/product/sub02.jsp"><img src="../images/main_image_04.jpg" /></a>
+		<a href="../product/sub01.jsp"><img src="../images/main_image_01.jpg" /></a>
+		<a href="../product/sub01_02.jsp"><img src="../images/main_image_02.jpg" /></a>
+		<a href="../product/sub01_03.jsp"><img src="../images/main_image_03.jpg" /></a>
+		<a href="../product/sub02.jsp"><img src="../images/main_image_04.jpg" /></a>
 		</div>
 
 		<div class="main_contents">
@@ -96,21 +99,21 @@
 				</div>
 			</div>
 			<div class="main_con_center">
-				<p class="main_title"><img src="../images/main_title02.gif" alt="공지사항 NOTICE" /><a href="/space/sub01.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
+				<p class="main_title"><img src="../images/main_title02.gif" alt="공지사항 NOTICE" /><a href="../space/sub01.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
 				<ul class="main_board_list">
-					<li><p><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></p></li>
-					<li><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><p><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></p></li>
+					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
 				</ul>
 			</div>
 			<div class="main_con_right">
-				<p class="main_title"><img src="../images/main_title03.gif" alt="자유게시판 FREE BOARD" /><a href="/space/sub03.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
+				<p class="main_title"><img src="../images/main_title03.gif" alt="자유게시판 FREE BOARD" /><a href="../space/sub03.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
 				<ul class="main_board_list">
-					<li><p><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></p></li>
-					<li><a href="">마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><p><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></p></li>
+					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
 				</ul>
 			</div>
 		</div>
@@ -214,42 +217,42 @@
 				</div>
 			</div>
 			<div class="main_con_right">
-				<p class="main_title"><img src="../images/main_title06.gif" alt="사진게시판 PHOTO BOARD" /><a href="/space/sub04.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
+				<p class="main_title"><img src="../images/main_title06.gif" alt="사진게시판 PHOTO BOARD" /><a href="../space/sub04.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
 				<ul class="main_photo_list">
 					<li>
 						<dl>
-							<dt><a href=""><img src="../images/g_img.gif" /></a></dt>
-							<dd><a href="">마포 구립 장애인...</a></dd>
+							<dt><a href="../space/sub04.jsp"><img src="../images/g_img.gif" /></a></dt>
+							<dd><a href="../space/sub04.jsp">마포 구립 장애인...</a></dd>
 						</dl>
 					</li>
 					<li>
 						<dl>
-							<dt><a href=""><img src="../images/g_img.gif" /></a></dt>
-							<dd><a href="">마포 구립 장애인...</a></dd>
+							<dt><a href="../space/sub04.jsp"><img src="../images/g_img.gif" /></a></dt>
+							<dd><a href="../space/sub04.jsp">마포 구립 장애인...</a></dd>
 						</dl>
 					</li>
 					<li>
 						<dl>
-							<dt><a href=""><img src="../images/g_img.gif" /></a></dt>
-							<dd><a href="">마포 구립 장애인...</a></dd>
+							<dt><a href="../space/sub04.jsp"><img src="../images/g_img.gif" /></a></dt>
+							<dd><a href="../space/sub04.jsp">마포 구립 장애인...</a></dd>
 						</dl>
 					</li>
 					<li>
 						<dl>
-							<dt><a href=""><img src="../images/g_img.gif" /></a></dt>
-							<dd><a href="">마포 구립 장애인...</a></dd>
+							<dt><a href="../space/sub04.jsp"><img src="../images/g_img.gif" /></a></dt>
+							<dd><a href="../space/sub04.jsp">마포 구립 장애인...</a></dd>
 						</dl>
 					</li>
 					<li>
 						<dl>
-							<dt><a href=""><img src="../images/g_img.gif" /></a></dt>
-							<dd><a href="">마포 구립 장애인...</a></dd>
+							<dt><a href="../space/sub04.jsp"><img src="../images/g_img.gif" /></a></dt>
+							<dd><a href="../space/sub04.jsp">마포 구립 장애인...</a></dd>
 						</dl>
 					</li>
 					<li>
 						<dl>
-							<dt><a href=""><img src="../images/g_img.gif" /></a></dt>
-							<dd><a href="">마포 구립 장애인...</a></dd>
+							<dt><a href="../space/sub04.jsp"><img src="../images/g_img.gif" /></a></dt>
+							<dd><a href="../space/sub04.jsp">마포 구립 장애인...</a></dd>
 						</dl>
 					</li>
 				</ul>

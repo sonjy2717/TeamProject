@@ -1,4 +1,4 @@
-<%@page import="java.net.URLEncoder"%>
+<%-- <%@page import="java.net.URLEncoder"%>
 <%@page import="utils.BoardPage"%>
 <%@page import="model1.board.BoardDTO"%>
 <%@page import="java.util.List"%>
@@ -167,4 +167,4 @@ dao.close();
 	<%@ include file="../include/footer.jsp" %>
 	</center>
  </body>
-</html>
+</html> --%>
