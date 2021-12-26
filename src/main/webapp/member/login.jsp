@@ -8,7 +8,6 @@
 String user_id = (String)session.getAttribute("user_id");
 MemberDAO dao = new MemberDAO(application);
 MemberDTO dto = dao.getMemberInfo(user_id);
-
 %>
 
 				

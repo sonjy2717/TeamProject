@@ -66,7 +66,7 @@ if(id==null){ //아이디 찾기
 		
 		String oneLine;
 		while ((oneLine = br.readLine()) != null) {
-			htmlContent += oneLine +"\n";
+	htmlContent += oneLine +"\n";
 		}
 		br.close();
 	}
@@ -89,15 +89,5 @@ if(id==null){ //아이디 찾기
 		JSFunction.alertBack("접수에 실패했습니다.", out);
 		e.printStackTrace();
 	}
-} 
-
-
-
-
-
-
-
-
-
-
+}
 %>

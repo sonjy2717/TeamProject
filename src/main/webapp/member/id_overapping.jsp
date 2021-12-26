@@ -26,7 +26,7 @@ function idUse(userid){
 <body>
     <h2>아이디 중복확인 하기</h2>
 
-    <h3>부모창에서 입력한 아이디 :<%= request.getParameter("id") %></h3>
+    <h3>부모창에서 입력한 아이디 :<%=request.getParameter("id")%></h3>
 <%
 String formId = request.getParameter("id");
 MemberDAO dao = new MemberDAO();

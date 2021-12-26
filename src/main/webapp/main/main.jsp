@@ -5,11 +5,10 @@
     pageEncoding="UTF-8"%>
     
 <%
-String user_id = (String)session.getAttribute("user_id");
-MemberDAO dao = new MemberDAO(application);
-MemberDTO dto = dao.getMemberInfo(user_id);
-
-%>
+    String user_id = (String)session.getAttribute("user_id");
+        MemberDAO dao = new MemberDAO(application);
+        MemberDTO dto = dao.getMemberInfo(user_id);
+    %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
