@@ -91,14 +91,14 @@ dao.close();
 	<!-- 검색 -->
         <div class="row">
             <form method="get" action="../space/sub05.jsp">
-                <div class="input-group ms-auto" style="width: 400px;">
+                <div class="input-group ms-auto" style="width: 400px; height:30px; margin-bottom: 20px">
                     <select name="searchField" class="form-control">
                          <option  ${request.getParameter(searchField) == "title" ? "selected": ""}   value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
                          <option ${request.getParameter(searchField) == "content" ? "selected": ""}  value="content">내용</option>
                          <option ${request.getParameter(searchField) == "id" ? "selected": ""} value="id">작성자</option>
                      </select>
                      <input type="text" name="searchWord" value="${request.getParameter("searchWord")}"class="form-control" placeholder="Search" style="width: 200px;">
-                     <button class="btn btn-success" type="submit">
+                     <button style="height:35px;" class="btn btn-success" type="submit">
                      <i class="bi-search" style="font-size: 1rem; color: white;"></i>
                      </button>
                 </div>
@@ -116,7 +116,6 @@ dao.close();
 		<col width="50px"/>
 	</colgroup>
 	
-
 	<thead>
 	<tr class="success">
 		<th class="text-center">번호</th>
@@ -211,6 +210,7 @@ dao.close();
 		</div>
 		<%@ include file="../include/quick.jsp" %>
 	</div>
+
 	<%@ include file="../include/footer.jsp" %>
 	</center>
  </body>
