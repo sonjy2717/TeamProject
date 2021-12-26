@@ -89,6 +89,9 @@
 			<!-- 수정버튼 -->
 			<%-- <button type="button" class="btn btn-primary btn-sm" onclick="location.href='Edit.jsp?idx=<%=dto.getIdx()%>&tname=<%=tname%>';">수정하기</button> --%>
 			<!-- <button type="button" class="btn btn-success btn-sm" onclick="deletePost();">삭제하기</button> -->	
+			<button type="button" class="btn btn-danger btn-sm"
+				onclick="location.href='../community/edit.do?tname=step';">수정하기</button>
+			&nbsp;
 			<button type="button" class="btn btn-primary btn-sm" 
 				onclick="location.href='../community/list.do?tname=step';">목록보기</button>
 		</div>

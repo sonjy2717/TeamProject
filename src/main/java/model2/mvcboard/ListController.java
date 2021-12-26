@@ -26,7 +26,7 @@ public class ListController extends HttpServlet {
 		// 해당 게시물을 불러옴
 		String tname = req.getParameter("tname");
 //		확인용
-		System.out.println("ListController : "+tname);
+		System.out.println("ListController : "+ tname);
 		
 		//검색어 관련 파라미터
         String searchField = req.getParameter("searchField");
@@ -78,6 +78,11 @@ public class ListController extends HttpServlet {
         req.setAttribute("boardLists", boardLists);
         req.setAttribute("map", map);
         //View로 포워드를 걸어준다. 
-        req.getRequestDispatcher("/community/sub01.jsp").forward(req, resp);
+        if(tname.equals("step")) {
+        	req.getRequestDispatcher("/community/sub01.jsp").forward(req, resp);
+        }
+        else {
+        	req.getRequestDispatcher("/community/sub02.jsp").forward(req, resp);
+        }
 	}
 }

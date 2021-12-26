@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -26,20 +27,28 @@ function validateForm(form){
 
 		<div class="contents_box">
 			<div class="left_contents">
-				
 				<%@ include file = "../include/community_leftmenu.jsp" %>
 			</div>
 			<div class="right_contents">
 				<div class="top_title">
-					<img src="../images/community/sub01_title.gif" alt="직원자료실" class="con_title" />
-					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;정보자료실<p>
+				<c:choose>
+				<c:when test="${ dto.getTname().equals('step') }">  <!-- 직원자료실인경우 -->
+			        <img src="../images/community/sub01_title.gif" alt="직원자료실" class="con_title" />
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;커뮤니티&nbsp;>&nbsp;직원자료실<p>
+			    </c:when>
+				<c:otherwise>
+					<img src="../images/community/sub02_title.gif" alt="보호자 게시판" class="con_title" />
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;커뮤니티&nbsp;>&nbsp;보호자 게시판<p>
+				</c:otherwise>
+				</c:choose>
 				</div>
-				<div>
+			</div>
 
 
 <form name="writeFrm" method="post"  enctype="multipart/form-data"
 	action="../community/write.do?tname=step" onsubmit="return validateForm(this);">
 <input type="hidden" name="tname" value="정보" />
+<!-- 나중에 로그인한 아이디값을 받아와야 함 -->
 <input type="hidden" name="id" value="test1" >
 	<table class="table table-bordered">
 	<colgroup>
@@ -77,15 +86,13 @@ function validateForm(form){
 		<button type="submit" class="btn btn-danger btn-sm">등록</button>&nbsp;
 		<button type="button" class="btn btn-primary btn-sm" 
 			onclick="location.href='../community/list.do?tname=step';">목록보기</button>
-			</div>
+		</div>
 	</div>
 </form> 
 
 				</div>
-			</div>
-		</div>
 		<%@ include file="../include/quick.jsp" %>
-	</div>
+			</div>
 
 
 	<%@ include file="../include/footer.jsp" %>

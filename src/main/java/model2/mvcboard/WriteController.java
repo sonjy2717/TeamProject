@@ -23,7 +23,7 @@ public class WriteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/community/sub01_write.jsp").forward(req, resp);
+        req.getRequestDispatcher("/community/Write.jsp").forward(req, resp);
     }
     
     //글쓰기 처리    
@@ -85,7 +85,7 @@ public class WriteController extends HttpServlet {
 
         if (result == 1) {
         	//쓰기에 성공하면 리스트로 이동한다.
-            resp.sendRedirect("../community/list.do?tname=step");
+            resp.sendRedirect("../community/list.do?tname="+ dto.getTname());
         }
         else {
         	//실패하면 쓰기페이지로 이동한다. 

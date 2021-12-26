@@ -153,4 +153,31 @@ public class MVCBoardDAO extends DBConnPool {
 			e.printStackTrace();
 		}
 	}
+
+//	[Edit]
+	//일련번호와 아이디가 일치할때만 게시물 업데이트 처리
+	public int updatePost(MVCBoardDTO dto) {
+		int result = 0;
+		
+		try {
+			String query = "UPDATE board "
+					+ " SET title=?, content=?, ofile=?, sfile=? "
+					+ " WHERE idx=? ";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getOfile());
+			psmt.setString(4, dto.getSfile());
+			psmt.setString(5, dto.getIdx());
+			
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
