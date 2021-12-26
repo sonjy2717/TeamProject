@@ -8,7 +8,7 @@
 
 //수정페이지에서 전송한 폼값 받기.
 
-/* String id = request.getParameter("id"); */
+String id = request.getParameter("id");
 String pass = request.getParameter("pass");
 String name = request.getParameter("name");
 
@@ -27,7 +27,7 @@ String detailadd = request.getParameter("addr2");
 //DTO객체에 입력값 추가하기.
 MemberDTO dto = new MemberDTO();
 
-/* dto.setId(id); */
+dto.setId(id);
 dto.setPass(pass);
 dto.setName(name);
 dto.setPhone_num(phone_num);

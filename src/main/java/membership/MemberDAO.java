@@ -202,7 +202,7 @@ public class MemberDAO  extends JDBConnect{
 			psmt.setString(5, dto.getPostcode());
 			psmt.setString(6, dto.getBasicadd());
 			psmt.setString(7, dto.getDetailadd());
-			//psmt.setString(8, dto.getId());
+			psmt.setString(8, dto.getId());
 			//쿼리 실행
 			result = psmt.executeUpdate();
 			
