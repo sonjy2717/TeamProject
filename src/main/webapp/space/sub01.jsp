@@ -87,22 +87,22 @@ dao.close();
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;공지사항<p>
 				</div>
 			</div>
-	<!-- 검색 -->
+		<!-- 검색 -->
         <div class="row">
             <form method="get" action="../space/sub01.jsp">
                 <div class="input-group ms-auto" style="width: 400px;">
                     <select name="searchField" class="form-control">
-                         <option value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
-                         <option value="content">내용</option>
-                         <option value="id">작성자</option>
+                         <option  ${request.getParameter(searchField) == "title" ? "selected": ""}   value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
+                         <option ${request.getParameter(searchField) == "content" ? "selected": ""}  value="content">내용</option>
+                         <option ${request.getParameter(searchField) == "id" ? "selected": ""} value="id">작성자</option>
                      </select>
-                     <input type="text" name="searchWord" class="form-control" placeholder="Search" style="width: 200px;">
+                     <input type="text" name="searchWord" value="${request.getParameter("searchWord")}"class="form-control" placeholder="Search" style="width: 200px;">
                      <button class="btn btn-success" type="submit">
                      <i class="bi-search" style="font-size: 1rem; color: white;"></i>
                      </button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
 	<div class="row">
 	<!-- 게시판리스트부분 -->
 	<table class="table table-bordered table-hover" >
@@ -178,41 +178,38 @@ dao.close();
 					}
 				}
 				%>
-
 	</tbody>
 	</table>
-</div>
-<div class="row mb-3" style="padding-right:50px;">
-	<div class="col d-flex justify-content-end">
-	<!-- 각종 버튼 부분 -->
-	<!-- <button type="reset" class="btn">Reset</button> -->
-	
-	<button type="button" class="btn btn-info"  onclick="location.href='sub01_write.jsp?tname=<%=tname%>';">글쓰기</button>
-	<button type="button" class="btn btn-warning">리스트보기</button>
-				
-	<!-- <button type="button" class="btn btn-primary">수정하기</button>
-	<button type="button" class="btn btn-success">삭제하기</button>
-	<button type="button" class="btn btn-info">답글쓰기</button>
-	
-	<button type="submit" class="btn btn-danger">전송하기</button> -->
 	</div>
-</div>
-<div class="row text-center">
-	<!-- 페이지 번호 -->
-    <div class="row mt-3">
-        <div class="col">
-        	<ul class="pagination justify-content-center">
-                <%=BoardPage.pagingStr(totalCount, pageSize,
-        				blockPage, pageNum, request.getRequestURI()) %>
-            </ul>
-        </div>
-     </div>
-</div>
+	<div class="row mb-3" style="padding-right:50px;">
+		<div class="col d-flex justify-content-end">
+		<!-- 각종 버튼 부분 -->
+		<!-- <button type="reset" class="btn">Reset</button> -->
+		
+		<button type="button" class="btn btn-info"  onclick="location.href='sub01_write.jsp?tname=<%=tname%>';">글쓰기</button>
+		<button type="button" class="btn btn-warning">리스트보기</button>
+					
+		<!-- <button type="button" class="btn btn-primary">수정하기</button>
+		<button type="button" class="btn btn-success">삭제하기</button>
+		<button type="button" class="btn btn-info">답글쓰기</button>
+		
+		<button type="submit" class="btn btn-danger">전송하기</button> -->
+		</div>
+	</div>
+	<div class="row text-center">
+		<!-- 페이지 번호 -->
+	    <div class="row mt-3">
+	        <div class="col">
+	        	<ul class="pagination justify-content-center">
+	                <%=BoardPage.pagingStr(totalCount, pageSize,
+	        				blockPage, pageNum, request.getRequestURI(),searchField,searchWord) %>
+	            </ul>
+	        </div>
+	     </div>
+	</div>
 		</div>
 		<%@ include file="../include/quick.jsp" %>
 	</div>
-
-
 	<%@ include file="../include/footer.jsp" %>
 	</center>
  </body>

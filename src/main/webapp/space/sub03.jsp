@@ -85,21 +85,22 @@ dao.close();
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;자유게시판<p>
 				</div>
 			</div>
-	<div class="row">
+	<!-- 검색 -->
+        <div class="row">
             <form method="get" action="../space/sub03.jsp">
                 <div class="input-group ms-auto" style="width: 400px;">
-                   <select name="searchField" class="form-control">
-                        <option value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
-                        <option value="content">내용</option>
-                        <option value="writer">작성자</option>
-                    </select>
-                    <input type="text" name="searchWord" class="form-control" placeholder="Search" style="width: 200px;">
-                    <button class="btn btn-success" type="submit">
-                   <i class="bi-search" style="font-size: 1rem; color: white;"></i>
-                 </button>
-              </div>
-         </form>
-     </div>
+                    <select name="searchField" class="form-control">
+                         <option  ${request.getParameter(searchField) == "title" ? "selected": ""}   value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
+                         <option ${request.getParameter(searchField) == "content" ? "selected": ""}  value="content">내용</option>
+                         <option ${request.getParameter(searchField) == "id" ? "selected": ""} value="id">작성자</option>
+                     </select>
+                     <input type="text" name="searchWord" value="${request.getParameter("searchWord")}"class="form-control" placeholder="Search" style="width: 200px;">
+                     <button class="btn btn-success" type="submit">
+                     <i class="bi-search" style="font-size: 1rem; color: white;"></i>
+                     </button>
+                </div>
+            </form>
+        </div>
 	<div class="row">
 	<!-- 게시판리스트부분 -->
 	<table class="table table-bordered table-hover" >
@@ -175,7 +176,6 @@ dao.close();
 					}
 				}
 				%>
-
 	</tbody>
 	</table>
 </div>
@@ -201,20 +201,16 @@ dao.close();
         <div class="col">
         	<ul class="pagination justify-content-center">
                 <%=BoardPage.pagingStr(totalCount, pageSize,
-        				blockPage, pageNum, request.getRequestURI()) %>
+        				blockPage, pageNum, request.getRequestURI(),searchField,searchWord) %>
             </ul>
         </div>
      </div>
 </div>
 		<%@ include file="../include/quick.jsp" %>
 	</div>
-
-
 		</div>
 			<%@ include file="../include/quick.jsp" %>
 	</div>
-	
-
 	<%@ include file="../include/footer.jsp" %>
 	</center>
  </body>
