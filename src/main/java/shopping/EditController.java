@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model2.shopping.BasketDTO;
 import model2.shopping.ShoppingDAO;
+import utils.JSFunction;
 
 @WebServlet("/market/edit.do")
 public class EditController extends HttpServlet {
@@ -18,11 +20,12 @@ public class EditController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		HttpSession session = req.getSession();
 		ShoppingDAO dao = new ShoppingDAO();
 		BasketDTO dto = new BasketDTO();
 		
+		String id = (String)session.getAttribute("user_id");
 		String idx = req.getParameter("basket_idx");
-		String id = req.getParameter("id");
 		String count = req.getParameter("basket_count");
 		
 		dto.setIdx(idx);

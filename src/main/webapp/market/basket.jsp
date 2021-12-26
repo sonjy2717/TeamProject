@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/global_head.jsp" %>
+<%@ include file="../util/IsLoggedIn.jsp" %>
 
 <script>
 function edit(idx) {
@@ -44,7 +45,6 @@ function deleteList() {
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린장터&nbsp;>&nbsp;수아밀 제품 주문<p>
 				</div>
 				<form name="frm">
-				<input type="hidden" name="id" value="test1" />
 				<input type="hidden" name="basket_idx" value="" />
 				<input type="hidden" name="basket_count" value="" />
 				<table cellpadding="0" cellspacing="0" border="0" class="basket_list">
