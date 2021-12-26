@@ -155,6 +155,7 @@ dto2.setTname(tname);
 		 for (String key : printTitle.keySet()){
 		        System.out.println("Key:"+key+", Value:"+ printTitle.get(key).getTitle());
 		  }
+		
 		// System.out.println(printTitle.get("2021-12-11").getTitle());
 		// System.out.println(printTitle.get("2021-12-11").getCalDate());
 		// System.out.println(printTitle.get("2021-12-18").getCalDate());
@@ -164,14 +165,25 @@ dto2.setTname(tname);
 		printCal = Integer.toString(year)+"-"+ Integer.toString(month) +"-" ; 
 					printCal += Integer.toString(i); 
 		*/
-		
+		System.out.println("8월 일정 확인: "+printTitle.get("2021-08-28").getTitle());
 		for(int i = 1; i <= MyCalendar.lastDay(year, month); i++){
 			String exp="";
 			switch(MyCalendar.weekDay(year, month, i)){
 				case 0 :
-					printCal = Integer.toString(year)+"-"+ Integer.toString(month) +"-" ; 
-					
+					printCal = Integer.toString(year)+"-";
+					if(month<10){
+					printCal +="0"+ Integer.toString(month) +"-" ; 
+					}else{
+					printCal += Integer.toString(month) +"-" ; 
+					}
+					if(i<10){
+						printCal +="0" + Integer.toString(i);
+					}
+					else{
 					printCal += Integer.toString(i);
+					}
+					System.out.println("printCal 확인1: "+printCal);
+	
 					if(printTitle.get(printCal) != null){
 						exp+= "<td class ='etc'><span style='color:red'>" +i +"</span><br/><a href=sub01_view.jsp?idx="+printTitle.get(printCal).getIdx()+"&tname="+tname+">";
 						exp+= printTitle.get(printCal).getTitle();
@@ -183,8 +195,19 @@ dto2.setTname(tname);
 					out.println(exp);
 					break;
 				case 6 :
-					printCal = Integer.toString(year)+"-"+ Integer.toString(month) +"-" ; 
-					printCal += Integer.toString(i);
+					printCal = Integer.toString(year)+"-";
+					if(month<10){
+						printCal +="0"+ Integer.toString(month) +"-" ; 
+					}else{
+						printCal += Integer.toString(month) +"-" ; 
+					}
+					if(i<10){
+						printCal +="0" + Integer.toString(i);
+					}
+					else{
+						printCal += Integer.toString(i);
+					}
+					System.out.println("printCal 확인2: "+printCal);
 					if(printTitle.get(printCal) != null){
 						exp+= "<td class ='etc'><span style='color:blue'>" +i +"</span><br/><a href=sub01_view.jsp?idx="+printTitle.get(printCal).getIdx()+"&tname="+tname+">";
 						exp+= printTitle.get(printCal).getTitle();
@@ -196,8 +219,19 @@ dto2.setTname(tname);
 					out.println(exp);
 					break;
 				default :
-					printCal = Integer.toString(year)+"-"+ Integer.toString(month) +"-" ; 
-					printCal += Integer.toString(i);
+					printCal = Integer.toString(year)+"-";
+					if(month<10){
+						printCal +="0"+ Integer.toString(month) +"-" ; 
+					}else{
+						printCal += Integer.toString(month) +"-" ; 
+					}
+					if(i<10){
+						printCal +="0" + Integer.toString(i);
+					}
+					else{
+						printCal += Integer.toString(i);
+					}
+					System.out.println("printCal 확인3: "+printCal);
 					if(printTitle.get(printCal) != null){
 						exp+= "<td class ='etc'>" +i +"<br/><a href=sub01_view.jsp?idx="+printTitle.get(printCal).getIdx()+"&tname="+tname+">";
 						exp+= printTitle.get(printCal).getTitle();
