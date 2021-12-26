@@ -1,5 +1,5 @@
-<%@page import="java.io.FileReader"%>
 <%@page import="smtp.NaverSMTP"%>
+<%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -43,21 +43,21 @@ if(id==null){ //아이디 찾기
 	JSFunction.alertLocation("귀하의 비밀번호를 이메일로 전송해드렸습니다.", "login.jsp", out);
 	
 	// DTO객체 생성
-	MemberDTO dto = new MemberDTO();
-	dto.setName(name);
-	dto.setEmail(email);
-	dto.setId(id);
+	/* MemberDTO dto = new MemberDTO(); */
+	memberDTO.setName(name);
+	memberDTO.setEmail(email);
+	memberDTO.setId(id);
 	
 	
 	/* 이메일 전송 */
 	Map<String, String> emailInfo = new HashMap<String, String>();
 	////////////////////////////////차후 관리자 이메일로 변경
 	emailInfo.put("from", "bbi-bbi-@naver.com");
-	emailInfo.put("to", dto.getEmail()); 
+	emailInfo.put("to", memberDTO.getEmail()); 
 	emailInfo.put("subject", "[마포구립장애인 직업재활센터] 비밀번호 확인 안내");
 
 	String content
-		= "<strong>["+ dto.getName() +"님의 패스워드는"+ dto.getPass() +" 입니다.]</strong><br><br>";
+		= "<strong>["+ memberDTO.getName() +"님의 패스워드는"+ memberDTO.getPass() +" 입니다.]</strong><br><br>";
 
 	String htmlContent = "";
 	try {

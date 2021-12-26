@@ -183,4 +183,35 @@ public class MemberDAO  extends JDBConnect{
         }
         return dto; 
     }
+	//게시물 수정 : 수정할 내용을 DTO객체에 저장 후 매개변수로 전달
+	public int updateEdit(MemberDTO dto) {
+		int result = 0;
+		
+		try {
+			//update를 위한 커리문
+			String query = "UPDATE member SET "
+						 + " name=?, pass=?, phone_num=?, email=?, postcode=?, basicadd=?, detailadd=? "
+						 + " WHERE id=?";
+			//prepared객체 생성
+			psmt = con.prepareStatement(query);
+			//인파라미터 설정
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getPhone_num());
+			psmt.setString(4, dto.getEmail());
+			psmt.setString(5, dto.getPostcode());
+			psmt.setString(6, dto.getBasicadd());
+			psmt.setString(7, dto.getDetailadd());
+			//psmt.setString(8, dto.getId());
+			//쿼리 실행
+			result = psmt.executeUpdate();
+			
+		}
+		catch(Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }
