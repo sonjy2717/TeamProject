@@ -38,9 +38,9 @@
 		<tr>
 			<td><%= f.getIdx() %></td>
 			<td><img src="../Uploads/<%= f.getSfile() %>" width="150"/></td>
-			<td><%= f.getName() %></td>
+			<%-- <td><%= f.getName() %></td> --%>
 			<td><%= f.getTitle() %></td>
-			<td><%= f.getCate() %></td>
+			<%-- <td><%= f.getCate() %></td> --%>
 			<td><%= f.getOfile() %></td>
 			<td><%= f.getSfile() %></td>
 			<td><%= f.getPostdate() %></td>

@@ -182,10 +182,8 @@ dao.close();
      </div>
 </div>
 		</div>
-			</div>
-		</div>
 		<%@ include file="../include/quick.jsp" %>
-	</div>
+			</div>
 	
 
 	<%@ include file="../include/footer.jsp" %>

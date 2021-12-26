@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import common.JDBConnect;
+import common.DBConnPool;
 
-public class ShoppingDAO extends JDBConnect {
+public class ShoppingDAO extends DBConnPool {
 	
 	//검색 조건에 맞는 게시물의 개수를 반환한다.
 	public int selectCount() {
@@ -150,22 +150,27 @@ public class ShoppingDAO extends JDBConnect {
 	}
 	
 	//장바구니 리스트 출력
-	public List<BasketDTO> showBasketList(String id, String idx) {
+	public List<BasketDTO> showBasketList(String id) {
 		List<BasketDTO> list = new Vector<BasketDTO>();
-		String query = "SELECT img, name, M.price, point, count, total "
+		String query = "SELECT img, name, M.price, point, count, total, M.idx "
 				+ "    FROM management M INNER JOIN basket B "
 				+ "    ON M.idx = B.idx "
-				+ " WHERE B.idx=? AND id=?";
+				+ " WHERE id=?";
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, idx);
-			psmt.setString(2, id);
+			psmt.setString(1, id);
 			rs = psmt.executeQuery();
 			
 			while (rs.next()) { //결과를 DTO에 저장
 				BasketDTO dto = new BasketDTO(); //DTO 객체 생성
 				
-				dto.setCount(rs.getString(1));
+				dto.setImg(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setPrice(rs.getString(3));
+				dto.setPoint(rs.getString(4));
+				dto.setCount(rs.getString(5));
+				dto.setTotal(rs.getString(6));
+				dto.setIdx(rs.getString(7));
 				
 				list.add(dto);
 			}
@@ -182,19 +187,71 @@ public class ShoppingDAO extends JDBConnect {
 	public int updateCount(String idx, String id) {
 		int result = 0;
 		
-		String query = "UPDATE basket SET "
-				+ " count = count + 1 "
-				+ " WHERE idx=? AND id=?";
+		String query1 = "UPDATE basket SET count = count + 1 WHERE idx=? AND id=?";
+		String query2 =	"UPDATE basket SET total = price * count WHERE idx=? AND id=?";
 		
 		try {
-			psmt = con.prepareStatement(query);
+			psmt = con.prepareStatement(query1);
 			psmt.setString(1, idx);
 			psmt.setString(2, id);
-			psmt.executeQuery();
 			result = psmt.executeUpdate();
+			if (result >= 1) {
+				psmt = con.prepareStatement(query2);
+				psmt.setString(1, idx);
+				psmt.setString(2, id);
+				result = psmt.executeUpdate();
+			}
 		}
 		catch (Exception e) {
 			System.out.println("장바구니 수량 증가 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int editBasket(String count, String idx, String id) {
+		int result = 0;
+		String query1 = "UPDATE basket SET count=? WHERE idx=? AND id=?";
+		String query2 = "UPDATE basket SET total = price * count WHERE idx=? AND id=?";
+		
+		try {
+			psmt = con.prepareStatement(query1);
+			psmt.setString(1, count);
+			psmt.setString(2, idx);
+			psmt.setString(3, id);
+			result = psmt.executeUpdate();
+			if (result >= 1) {
+				psmt = con.prepareStatement(query2);
+				psmt.setString(1, idx);
+				psmt.setString(2, id);
+				result = psmt.executeUpdate();
+			}
+		}
+		catch (Exception e) {
+			System.out.println("장바구니 업데이트 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int basketTotal(String id) {
+		int result = 0;
+		
+		String query = "SELECT total FROM basket WHERE id=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				result += rs.getInt(1);
+			}
+		}
+		catch (Exception e) {
+			System.out.println("합계 금액을 구하는 중 예외 발생");
 			e.printStackTrace();
 		}
 		

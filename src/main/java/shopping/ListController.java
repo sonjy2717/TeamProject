@@ -38,7 +38,7 @@ public class ListController extends HttpServlet {
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
 		int blockPage = Integer.parseInt(application.getInitParameter("POSTS_PER_BLOCK"));
 		
-		/*
+		/*	
 		목록에 첫 진입시에는 무조건 1페이지로 가정한 후 게시물을 얻어옴.
 		특정 페이지로 진입한 경우에는 파라미터를 받아서 구간을 계산해서 얻어옴.
 		 */

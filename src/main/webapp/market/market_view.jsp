@@ -7,17 +7,30 @@
 function basket() {
 	var form = document.frm;
 	
+	if (form.count.value <= 0) {
+		alert("수량은 0개 이하로 설정할 수 없습니다.");
+		form.count.focus();
+		form.count.value = '1';
+		return;
+	}
+	
 	form.method = "post";
 	form.action = "../market/basket.do";
 	form.submit();
 }
-function buy() {
+/* function buy() {
 	var form = document.frm;
+	
+	if (form.count.value <= 0) {
+		alert("수량은 0개 이하로 설정할 수 없습니다.");
+		form.count.focus();
+		return;
+	}
 	
 	form.method = "post";
 	form.action = "../market/buy.do";
 	form.submit();
-}
+} */
 </script>
 
  <body>
@@ -39,6 +52,8 @@ function buy() {
 					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린장터&nbsp;>&nbsp;수아밀 제품 주문<p>
 				</div>
 				<form name="frm">
+				<input type="hidden" name="idx" value="${ dto.idx }" />
+				<input type="hidden" name="price" value="${ dto.price }" />
 				<div class="market_view_box">
 					<div class="market_left">
 						<img src="../images/market/${ dto.img }" width="300px" alt="이미지 입니당" />
@@ -67,9 +82,9 @@ function buy() {
 							</li>
 						</ul>
 						<p class="btn_box">
-							<button type="button" onclick="buy();"><img src="../images/market/m_btn01.gif" alt="바로구매" /></button>
+							<img src="../images/market/m_btn01.gif" onclick="buy();" alt="바로구매" />
 							&nbsp;&nbsp;
-							<button type="button" onclick="basket();"><img src="../images/market/m_btn02.gif" alt="장바구니" /></button>
+							<img src="../images/market/m_btn02.gif" onclick="basket();" alt="장바구니" />
 						</p>
 					</div>
 				</div>
