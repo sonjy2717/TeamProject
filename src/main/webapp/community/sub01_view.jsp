@@ -74,9 +74,10 @@
 			<th class="text-center" 
 				style="vertical-align:middle;">첨부파일</th>
 			<td colspan="5">
-				<c:if test="${ not empty row.ofile }">
+				<c:if test="${ not empty dto.ofile }">
 					<%-- <img src="../Uploads/${ dto.sfile }" width="100" height="100"> --%>
-					<a href="../community/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[다운로드]</a>
+					<a href="../community/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
+					${ dto.ofile }[다운로드]</a>
 				</c:if>
 			</td>
 		</tr>
