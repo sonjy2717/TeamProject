@@ -67,7 +67,7 @@ public class ListController extends HttpServlet {
         
         // 페이지 번호를 생성하기 위해 메소드 호출
         String pagingImg = MVCBoardPage.pagingStr(totalCount, pageSize,
-        		blockPage, pageNum, "../community/list.do", tname);
+        		blockPage, pageNum, "../community/list.do", tname, map);
         // View로 전달할 데이터를 Map컬렉션에 저장
         map.put("pagingImg", pagingImg);//페이지 번호
         map.put("totalCount", totalCount);//전체 게시물의 갯수
@@ -77,12 +77,13 @@ public class ListController extends HttpServlet {
         //View로 전달할 객체들을 request영역에 저장
         req.setAttribute("boardLists", boardLists);
         req.setAttribute("map", map);
+        
         //View로 포워드를 걸어준다. 
         if(tname.equals("step")) {
-        	req.getRequestDispatcher("/community/sub01.jsp").forward(req, resp);
+        	req.getRequestDispatcher("/community/sub01.jsp?tname=step").forward(req, resp);
         }
         else {
-        	req.getRequestDispatcher("/community/sub02.jsp").forward(req, resp);
+        	req.getRequestDispatcher("/community/sub02.jsp?tname=guard").forward(req, resp);
         }
 	}
 }

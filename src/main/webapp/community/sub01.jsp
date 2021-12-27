@@ -30,7 +30,8 @@
 			</div>
 			<!-- 검색 -->
 	        <div class="row">
-	            <form class="mt-3" method="get" action="../community/list.do?tname=step">
+	            <form class="mt-3" method="get" action="../community/list.do">
+	            <input type="hidden" name="tname" value="step" />
 	                <div class="input-group mb-3 ms-auto" style="width: 400px;">
 	                    <select name="searchField" class="form-control">
 	                         <option value="title">제목</option>    <!-- 여기에 value에 값이 있어야지 searchWord로 검색했을때 값들이 나온다. -->
@@ -129,7 +130,16 @@
 					    	</ul>
 						</div> -->
     			</div>
-					${ map.pagingImg }
+    			<div class="row text-center">
+					<!-- 페이지 번호 -->
+				    <div class="row mt-3">
+				        <div class="col">
+				        	<ul class="pagination justify-content-center">
+				                ${ map.pagingImg }
+				            </ul>
+				        </div>
+				     </div>
+				</div>
 				</div>
 			</div>
 		</div>

@@ -38,7 +38,7 @@ public class MVCBoardDAO extends DBConnPool {
 		String query = " "
                 + "SELECT * FROM "
                 + "		( SELECT Tb.*, ROWNUM rNum FROM "
-                + "			( SELECT * FROM board WHERE tname=?";
+                + "			( SELECT * FROM board WHERE tname ='"+tname+"'";
 		// 검색어가 있는경우
         if (map.get("searchWord") != null)
         {
@@ -52,9 +52,8 @@ public class MVCBoardDAO extends DBConnPool {
 		
 		try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, tname);
-            psmt.setString(2, map.get("start").toString());
-            psmt.setString(3, map.get("end").toString());
+            psmt.setString(1, map.get("start").toString());
+            psmt.setString(2, map.get("end").toString());
             rs = psmt.executeQuery();
 
             while (rs.next()) {
