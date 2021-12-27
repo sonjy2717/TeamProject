@@ -129,14 +129,6 @@ dao.close();
 	<tbody>
 	<!-- 리스트반복 -->
 	
-	<tr>
-		<td class="text-center">번호</td>
-		<td class="text-left"><a href="sub01_view.jsp">제목</a></td>
-		<td class="text-center">작성자</td>
-		<td class="text-center">작성일</td>
-		<td class="text-center">조회수</td>
-		<td class="text-center">첨부</td>
-	</tr>
 		<%
 			if(boardLists.isEmpty()){
 		%>

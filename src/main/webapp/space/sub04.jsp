@@ -98,7 +98,7 @@ dao.close();
                          <option value="content">내용</option>
                          <option value="id">작성자</option>
                      </select>
-                     <input type="text" name="searchWord" value="${request.getParameter("searchWord")}"class="form-control" placeholder="Search" style="width: 200px;">
+                     <input type="text" name="searchWord" class="form-control" placeholder="Search" style="width: 200px;">
                      <button style="height:35px;" class="btn btn-success" type="submit">
                      <i class="bi-search" style="font-size: 1rem; color: white;"></i>
                      </button>

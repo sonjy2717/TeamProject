@@ -94,7 +94,7 @@ dao.close();
                          <option value="content">내용</option>
                          <option value="id">작성자</option>
                      </select>
-                     <input type="text" name="searchWord" value="${request.getParameter("searchWord")}"class="form-control" placeholder="Search" style="width: 200px;">
+                     <input type="text" name="searchWord" class="form-control" placeholder="Search" style="width: 200px;">
                      <button style="height:35px;" class="btn btn-success" type="submit">
                      <i class="bi-search" style="font-size: 1rem; color: white;"></i>
                      </button>
@@ -127,14 +127,6 @@ dao.close();
 	<tbody>
 	<!-- 리스트반복 -->
 	
-	<tr>
-		<td class="text-center">번호</td>
-		<td class="text-left"><a href="sub01_view.jsp">제목</a></td>
-		<td class="text-center">작성자</td>
-		<td class="text-center">작성일</td>
-		<td class="text-center">조회수</td>
-		<td class="text-center">첨부</td>
-	</tr>
 		<%
 			if(boardLists.isEmpty()){
 		%>
