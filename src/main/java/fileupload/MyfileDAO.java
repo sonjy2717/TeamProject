@@ -46,13 +46,12 @@ public class MyfileDAO extends DBConnPool {
             //ResultSet의 객체수 만큼 반복
             while (rs.next()) {                
                 MyfileDTO dto = new MyfileDTO();
-                dto.setIdx(rs.getString(1));
-                dto.setName(rs.getString(2));
-                dto.setTitle(rs.getString(3));
-                dto.setCate(rs.getString(4));
-                dto.setOfile(rs.getString(5));
-                dto.setSfile(rs.getString(6));
-                dto.setPostdate(rs.getString(7));
+                dto.setIdx(rs.getString("idx"));
+                dto.setId(rs.getString("id"));
+                dto.setTitle(rs.getString("title"));
+                dto.setOfile(rs.getString("ofile"));
+                dto.setSfile(rs.getString("sfile"));
+                dto.setPostdate(rs.getString("postdate"));
                 //각 레코드를 List컬렉션에 추가
                 fileList.add(dto);   
             }
