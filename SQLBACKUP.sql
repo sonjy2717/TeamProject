@@ -91,51 +91,66 @@ select id, title, content, postdate, visitcount, sfile, ofile from board where t
       
       
       
-      
 -------------------블루 클리닝, 체험학습 신청서 테이블----------------------
+-- 테이블 삭제시 사용
+drop table blue_cleaning;
 -- 블루클리닝 견적의뢰 테이블 생성
 create table blue_cleaning (
     id varchar2(10) primary key,  --아이디
     name varchar2(100) not null, --고객명/회사명
-    address varchar2(100) not null, --청소할 곳 주소
+    bc_postcode number(10) not null, --우편번호
+    bc_basicadd varchar2(100) not null, --기본 주소
+    bc_detailadd varchar2(100) not null, --상세 주소
     phone_num varchar2(30) not null, --연락처
     email varchar2(50) not null, --이메일
     bc_type varchar2(200) not null, --청소종류
-    bc_space varchar2(10) not null, --평수
+    bc_space number not null, --평수
     bc_date varchar2(10) not null, --청소 희망날짜
-    regi_type number not null, --접수종류 구분
-    note varchar2(200) not null --기타 특이사항
+    regi_type varchar2(20) not null, --접수종류 구분
+    note varchar2(200) --기타 특이사항
 );
+--제약조건 설정(외래키)
+ALTER TABLE blue_cleaning
+   ADD constraint bc_mem_fk --제약조건의 이름
+   FOREIGN KEY (id)
+   REFERENCES member (id);
 
 --더미 데이터
 insert into blue_cleaning
-    values ('test1', '회사명1', '주소1', '010-1111-1111', 'test1@naver.com',
-            '청소종류1', '100평', '2022-01-01', 1, '기타 특이사항1');
+    values ('test1', '회사명1', 11111, '기본주소1', '상세주소1', '010-1111-1111', 'test1@naver.com',
+            '청소종류1', 111, '2022-01-01', '예약신청', '기타 특이사항1');
 insert into blue_cleaning
-    values ('test2', '회사명2', '주소2', '010-2222-2222', 'test2@naver.com',
-            '청소종류2', '1000', '2022-02-02', 2, '기타 특이사항2');
+    values ('test2', '회사명2', 22222, '기본주소2', '상세주소2', '010-2222-2222', 'test2@naver.com',
+            '청소종류2', 222, '2022-02-02', '견적문의', '기타 특이사항2');
 
 
+-- 테이블 삭제시 사용
+drop table field_trip;
 -- 체험학습 신청 테이블 생성
 create table field_trip (
     id varchar2(10) primary key,  --아이디
     name varchar2(100) not null, --고객명/회사명
     phone_num varchar2(30) not null, --연락처
     email varchar2(50) not null, --이메일
-    cake varchar2(10) not null,--케익체험 인원수
-    cookie varchar2(10) not null,--쿠키체험 인원수
-    c_date varchar2(10) not null, --체험 희망날짜
+    ft_cake number not null,--케익체험 인원수
+    ft_cookie number not null,--쿠키체험 인원수
+    ft_date varchar2(10) not null, --체험 희망날짜
     regi_type number not null, --접수종류 구분
-    note varchar2(200) not null --기타 특이사항
+    note varchar2(200) --기타 특이사항
 );
-
+--제약조건 설정(외래키)
+ALTER TABLE field_trip
+   ADD constraint ft_mem_fk --제약조건의 이름
+   FOREIGN KEY (id)
+   REFERENCES member (id);
+   
 --더미 데이터
 insert into field_trip
     values ('test1', '회사명1', '010-1111-1111', 'test1@naver.com',
-            '1명', '1명', '2022-01-01', 1, '기타 특이사항1');
+            1, 1, '2022-01-01', 1, '기타 특이사항1');
 insert into field_trip
     values ('test2', '회사명2', '010-2222-2222', 'test2@naver.com',
-            '2', '2', '2022-02-02', 2, '기타 특이사항2');
+            2, 2, '2022-02-02', 2, '기타 특이사항2');
 
 --------------------쇼핑몰 구현 테이블----------------------
 
