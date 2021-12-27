@@ -154,35 +154,50 @@ insert into field_trip
 
 --------------------쇼핑몰 구현 테이블----------------------
 
---상품관리 테이블
-drop table management;
+--테이블 삭제
 drop table orderform;
+drop table management;
+drop table basket;
 
---장바구니 테이블
+--상품관리 테이블
 create table management (
-    idx varchar2(10) primary key, --일련번호
+    idx varchar2(10) primary key, --상품 일련번호
+    img varchar2(2000), --상품 이미지
     name varchar2(30) not null, --상품명
-    price number(10) not null, --가격
-    point number(10) not null, --적립금
-    count number(5) --수량
+    price number(10) not null, --상품 가격
+    point number(10), --적립금
+    exp varchar2(100) --제품 설명
 );
 
 --더미 데이터
-insert into management (idx, name, price, point) values ('C01', '의자', 38000, 380);
-insert into management (idx, name, price, point) values ('D01', '책상', 99000, 990);
-insert into management (idx, name, price, point) values ('C02', '의자2', 38000, 380);
-insert into management (idx, name, price, point) values ('D02', '책상2', 99000, 990);
-insert into management (idx, name, price, point) values ('C03', '의자3', 38000, 380);
-insert into management (idx, name, price, point) values ('D03', '책상3', 99000, 990);
-insert into management (idx, name, price, point) values ('C04', '의자4', 38000, 380);
-insert into management (idx, name, price, point) values ('D04', '책상4', 99000, 990);
+insert into management values('C01', 'chair01.jpeg', '의자1', 38000, 380, '맘모스가 앉아도 부셔지지 않는 의자');
+insert into management values('C02', 'chair02.jpeg', '의자2', 38000, 380, '롯데타워 꼭대기에서 던져도 부셔지지 않는 의자');
+insert into management values('D01', 'desk01.jpeg', '책상1', 58000, 580, '토르가 내려쳐도 부셔지지 않는 책상');
+insert into management values('D02', 'desk02.jpeg', '책상2', 58000, 580, '비행기가 착륙해도 부셔지지 않는 책상');
+
+--장바구니 테이블
+create table basket (
+    idx varchar2(10) not null, --일련번호
+    id varchar2(10) not null, --유저아이디
+    price number(10) not null, --가격
+    count number(5), --수량
+    total number(10) --합계금액
+);
+
+--더미 데이터
+insert into basket values ('C01', 'test1', 38000, 2, 76000);
+insert into basket values ('C02', 'test1', 38000, 1, 38000);
+insert into basket values ('D01', 'test1', 58000, 2, 116000);
+insert into basket values ('D02', 'test1', 58000, 1, 58000);
 
 --상품주문서 테이블
 create table orderform (
-    idx varchar2(10) primary key, --상품 일련번호
+    idx varchar2(10) not null, --상품 일련번호
     name varchar2(30) not null, --주문자 성명
-    location varchar2(30) not null, --배송지 정보
-    phone_num varchar2(20) not null, -- 핸드폰
+    postcode number(10) not null, --우편번호
+    basicadd varchar2(100) not null, --기본 주소
+    detailadd varchar2(100) not null, --상세 주소
+    phone_num varchar2(20) primary key, -- 핸드폰
     email varchar2(50) not null, --이메일
     message varchar2(50), --배송메세지
     payment number(5) not null --결제방법
@@ -196,23 +211,111 @@ insert into orderform
    
 commit;
 
+-- 제약 조건 추가
 ALTER TABLE orderform
    ADD constraint order_manage_fk
    FOREIGN KEY (idx)
    REFERENCES management (idx);
+   
+-- 제약 조건 추가
+ALTER TABLE basket
+   ADD constraint basket_manage_fk
+   FOREIGN KEY (idx)
+   REFERENCES management (idx);
 
+--테스트용 코드
 select rownum from management;
-SELECT * FROM (SELECT Tb.*, ROWNUM rNum FROM (SELECT * FROM management ORDER BY idx DESC)Tb) WHERE rNum BETWEEN 4 AND 6;
+SELECT * FROM (SELECT Tb.*, ROWNUM rNum FROM (SELECT * FROM management ORDER BY idx DESC)Tb) WHERE rNum BETWEEN 1 AND 3;
 SELECT * FROM ( SELECT Tb.*, ROWNUM rNum FROM ( SELECT * FROM management ORDER BY idx DESC ) Tb);
 select to_char(price, '999,999,999') from management;
 
 SELECT * FROM 
     (SELECT Tb.*, ROWNUM rNum FROM 
-        (SELECT idx, name, to_char(price, '999,999,999'), 
-        to_char(point, '999,999,999'), count FROM management ORDER BY idx DESC)Tb) 
-WHERE rNum BETWEEN 4 AND 6;
+        (SELECT idx, img, name, to_char(price, '999,999,999'),
+        to_char(point, '999,999,999'), exp FROM management ORDER BY idx DESC)Tb) 
+WHERE rNum BETWEEN 1 AND 3;
+
+SELECT * FROM management ORDER BY rownum DESC;
 
 SELECT idx, name, to_char(price, '999,999,999'), to_char(point, '999,999,999'), count FROM management WHERE idx='D04';
+
+SELECT * FROM (
+    SELECT Tb.* FROM (
+        SELECT idx, img, name, to_char(price, '999,999,999'), to_char(point, '999,999,999') 
+            FROM management ORDER BY idx DESC) Tb );
+            
+SELECT idx, id, price, count, total FROM basket WHERE id='test계정';
+
+UPDATE basket SET count = count + 1 WHERE idx='D01' AND id='test계정';
+UPDATE basket SET total = price * count where idx='C01' AND id='test1';
+
+delete basket where id='test1';
+
+select img, name, M.price, point, count, total
+    from management M inner join basket B
+    on M.idx = B.idx
+where id='test계정';
+
+update basket set count=1 where idx='D02';
+update basket set total = price * count where idx='D02';
+
+select total from basket where id='test계정';
+
+----------------------------------------------------------------------------
+----------------Board table 추가(꼭 추가 해야함.) ---------------------------------------
+ alter table board add calDate varchar2(20);
+ 
+-------------------- 공지, 자유, 정보게시판 구현 확인 더미데이터 ----------------------
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '자유게시판', '내용1입니다', sysdate, 0, '자유');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '직원게시판', '내용1입니다', sysdate, 0, '직원');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '직원게시판2', '직원2입니다', sysdate, 0, '직원');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '직원게시판3', '내용3입니다', sysdate, 0, '직원');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '자료게시판', '자료2입니다', sysdate, 0, '자료');
+
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '자료게시판2', '자료2입니다', sysdate, 0, '자료');
+
+insert into board ( idx, title, content, id )
+					values (seq_board_num.nextval, '공지글', '공지글입니다', 'test1');
+insert into board ( idx, title, content, id , visitcount, tname )
+					values (seq_board_num.nextval, '공지글3333', '공지글3333', 'test1', 0, '공지');
+insert into board ( idx, title, content, id , visitcount, tname )
+					values (seq_board_num.nextval, '공지글4444', '공지글4444', 'test1', 0, '공지');
+insert into board ( idx, title, content, id , visitcount, tname )
+					values (seq_board_num.nextval, '공지글5555', '공지글55555', 'test1', 0, '공지');
+
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '자유를찾다1', '자유를찾다1입니다', sysdate, 0, '자유');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '자유를찾다2', '자유를찾다3입니다', sysdate, 0, '자유');
+    insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '자유를찾다3', '자유를찾다2입니다', sysdate, 0, '자유');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '등록확인1', '등록확인1입니다', sysdate, 0, '자유');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '등록확인2', '등록확인2입니다', sysdate, 0, '자유');
+    insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '등록확인3', '등록확인3입니다', sysdate, 0, '자유');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '버튼확인1', '버튼확인1입니다', sysdate, 0, '자유');
+insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '버튼확인2', '버튼확인2입니다', sysdate, 0, '자유');
+    insert into board (idx, id, title, content, postdate, visitcount, tname)
+    values (seq_board_num.nextval, 'test1', '버튼확인3', '버튼확인3입니다', sysdate, 0, '자유');
+
+UPDATE board SET title='자유글수정', content='자유글수정합니다.' WHERE idx=1;
+
+delete from board where tname = '공지';
+delete from board where tname = '자유';
+delete from board where tname = '정보';
+delete from board where tname = '사진';
+delete from board where tname = '직원';
+delete from board where tname = '자료';
 ----------------------------------------------------------------------------
 
 commit;
