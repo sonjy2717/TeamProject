@@ -110,19 +110,19 @@
 			<div class="main_con_center">
 				<p class="main_title"><img src="../images/main_title02.gif" alt="공지사항 NOTICE" /><a href="../space/sub01.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
 				<ul class="main_board_list">
-					<li><p><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></p></li>
-					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><p><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></p></li>
+					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></li>
+					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></li>
+					<li><a href="../space/sub01.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></li>
 				</ul>
 			</div>
 			<div class="main_con_right">
 				<p class="main_title"><img src="../images/main_title03.gif" alt="자유게시판 FREE BOARD" /><a href="../space/sub03.jsp"><img src="../images/more.gif" alt="more" class="more_btn" /></a></p>
 				<ul class="main_board_list">
-					<li><p><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></p></li>
-					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
-					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2012.01.26</span></li>
+					<li><p><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></p></li>
+					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></li>
+					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></li>
+					<li><a href="../space/sub03.jsp">마포 구립 장애인 직업재활센터 홈페이지</a><span>2021.12.25</span></li>
 				</ul>
 			</div>
 		</div>
