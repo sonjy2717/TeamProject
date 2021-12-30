@@ -19,6 +19,15 @@
 @import url("../css/common.css");
 @import url("../css/main.css");
 @import url("../css/sub.css");
+.main_board_list li a
+{
+	display:inline-block;
+	width: 202px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    
+}
 </style>
 </head>
 <body>
